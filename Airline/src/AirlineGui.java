@@ -11,6 +11,10 @@ public class AirlineGui extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	
+	
+	AirlineBookingController ac = new AirlineBookingController();
+	
 	public AirlineGui() {
 		setTitle("Air Crash ");
 		getContentPane().setLayout(new BorderLayout(0, 0));
