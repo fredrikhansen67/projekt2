@@ -1,6 +1,10 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Boing737 extends Aircraft {
+	
+	List<Customer> seatList = new ArrayList<Customer>();
+	
 	private String name ;
 
 	public Boing737(String name){
@@ -17,6 +21,13 @@ public class Boing737 extends Aircraft {
 		this.name = name;
 	}
 	
+	public void addBooking(Customer cus, int seat){
+		//TODO stoppa in i listan
+	}
+	
+	public void removeBooking(){
+		//TODO yepp...
+	}
 	
 	
 
