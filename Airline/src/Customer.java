@@ -11,7 +11,7 @@ public class Customer {
 	
 	public Customer(String name, int age, int telephone, int personalNumber) {
 		
-		this.name = name;
+		this.name =  name;
 		this.age = age;
 		this.telephone = telephone;
 		this.personalNumber = personalNumber;
