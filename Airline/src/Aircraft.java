@@ -1,7 +1,7 @@
 
 
 public class Aircraft {
-//testAJ
+//test AJ
 	
 	
 	public void test() {
