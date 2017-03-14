@@ -12,7 +12,7 @@ public class AirlineGui extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	public AirlineGui() {
-		setTitle("Air Crash");
+		setTitle("Air Crash ");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JButton btnNewButton = new JButton("Add booking");
