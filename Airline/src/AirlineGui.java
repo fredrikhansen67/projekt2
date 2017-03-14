@@ -43,6 +43,9 @@ public class AirlineGui extends JFrame {
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 		
+		JLabel lblNewLabel = new JLabel("New label");
+		panel.add(lblNewLabel);
+		
 	}
 
 }
