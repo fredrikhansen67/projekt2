@@ -2,20 +2,20 @@
 
 public class Customer {
 
-	private static int customerID;                // Final på den här ?? 
+	private static int customerID;         
 	private String name;
 	private int age;
 	private int telephone;
-	private int personalNumber;
+	private int socialNumber;
 	private int customerIndex;
 	
 	
-	public Customer(String name, int age, int telephone, int personalNumber) {
+	public Customer(String name, int age, int telephone, int socialNumber) {
 		
 		this.name =  name;
 		this.age = age;
 		this.telephone = telephone;
-		this.personalNumber = personalNumber;
+		this.socialNumber = socialNumber;
 		customerIndex=customerID++; 
 	
 	}
@@ -45,8 +45,8 @@ public class Customer {
 	}
 
 
-	public int getPersonalNumber() {
-		return personalNumber;
+	public int getSocialNumber() {
+		return socialNumber;
 	}
 	
 	
