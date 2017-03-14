@@ -45,8 +45,8 @@ public class Customer {
 	}
 
 
-	public int getPersonalNumber() {
-		return personalNumber;
+	public int getSocialNumber() {
+		return socialNumber;
 	}
 	
 	
