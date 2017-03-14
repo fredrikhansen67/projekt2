@@ -50,6 +50,8 @@ public class AirlineGui extends JFrame {
 		JLabel lblNewLabel = new JLabel("New label");
 		panel.add(lblNewLabel);
 		
+		
+		
 	}
 
 }

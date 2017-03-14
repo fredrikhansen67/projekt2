@@ -7,6 +7,7 @@ public class Airline {
 	
 			ac.initSystem();
 			AirlineGui gui = new AirlineGui();
+			
 			System.out.println(ac.toString());
 		
 	}
