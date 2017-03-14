@@ -10,7 +10,7 @@ public class Customer {
 	private int customerIndex;
 	
 	
-	public Customer(String name, int age, int telephone, int personalNumber) {
+	public Customer(String name, int age, int telephone, int socialNumber) {
 		
 		this.name =  name;
 		this.age = age;
