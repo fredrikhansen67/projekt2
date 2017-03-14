@@ -2,7 +2,7 @@
 
 public class Customer {
 
-	private static int customerID;                // Final på den här ?? 
+	private static int customerID;         
 	private String name;
 	private int age;
 	private int telephone;
