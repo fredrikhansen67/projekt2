@@ -21,8 +21,12 @@ public class Customer {
 	}
 
 
-	public int getCustomerID() {
+	public static int getCustomerID() {
 		return customerID;
+	}
+	
+	public int getCustomerIndex() {
+		return customerIndex;
 	}
 
 
