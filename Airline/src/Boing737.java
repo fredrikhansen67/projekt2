@@ -3,6 +3,9 @@
 public class Boing737 extends Aircraft {
 	private String name ;
 
+	public Boing737(String name){
+		this.name = name;
+	}
 
 	@Override
 	public String getName() {

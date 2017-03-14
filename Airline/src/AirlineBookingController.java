@@ -18,11 +18,11 @@ public class AirlineBookingController {
 	
 	public void initSystem(){
 		//Skapa alla flygplan.
-		Aircraft flyg1 = new Boing737();
-		Aircraft flyg2 = new Boing737();
-		Aircraft flyg3 = new Boing737();
-		Aircraft flyg4 = new Boing737();
-		Aircraft flyg5 = new Boing737();
+		Aircraft flyg1 = new Boing737("sk121");
+		Aircraft flyg2 = new Boing737("sk122");
+		Aircraft flyg3 = new Boing737("sk123");
+		Aircraft flyg4 = new Boing737("sk124");
+		Aircraft flyg5 = new Boing737("sk125");
 		aircraftsList.add(flyg1);
 		aircraftsList.add(flyg2);
 		aircraftsList.add(flyg3);
