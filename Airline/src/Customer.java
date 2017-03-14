@@ -7,6 +7,7 @@ public class Customer {
 	private int age;
 	private int telephone;
 	private int personalNumber;
+	private int customerIndex;
 	
 	
 	public Customer(String name, int age, int telephone, int personalNumber) {
@@ -15,12 +16,12 @@ public class Customer {
 		this.age = age;
 		this.telephone = telephone;
 		this.personalNumber = personalNumber;
-		customerID++; 
+		customerIndex=customerID++; 
 	
 	}
 
 
-	public static int getCustomerID() {
+	public int getCustomerID() {
 		return customerID;
 	}
 
