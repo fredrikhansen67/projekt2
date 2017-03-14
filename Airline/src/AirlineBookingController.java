@@ -33,7 +33,7 @@ public class AirlineBookingController {
 		Customer cus3 = new Customer("pelle",22,33,44);
 	}
 	
-	public void addBooking(String name ,int age, int phone , int socialNumber, String flight, int seat){
+	public void addBooking(String name ,int age, int phone , int socialNumber, Aircraft flight, int seat){
 		Customer cus = new Customer( name , age,  phone ,  socialNumber);
 		Booking book = new Booking( cus, flight, seat);
 		
