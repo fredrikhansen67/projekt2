@@ -6,7 +6,7 @@ public class Customer {
 	private String name;
 	private int age;
 	private int telephone;
-	private int personalNumber;
+	private int socialNumber;
 	private int customerIndex;
 	
 	
@@ -15,7 +15,7 @@ public class Customer {
 		this.name =  name;
 		this.age = age;
 		this.telephone = telephone;
-		this.personalNumber = personalNumber;
+		this.socialNumber = socialNumber;
 		customerIndex=customerID++; 
 	
 	}
