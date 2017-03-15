@@ -8,7 +8,7 @@ public class FoodList implements FoodInterface{
 	
 	public HashMap<FoodItem,CabinClass> foodMap = new HashMap<FoodItem,CabinClass>();
 	
-	
+
 	
 	public FoodList() {
 			
