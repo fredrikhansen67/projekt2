@@ -3,12 +3,14 @@ import java.util.List;
 
 public class Boing737 extends Aircraft {
 	
-	List<Customer> seatList = new ArrayList<Customer>();
+	ArrayList<String> seatList = new ArrayList<String>(10);
 	
 	private String name ;
 
 	public Boing737(String name){
 		this.name = name;
+		seatList.add("1");
+		seatList.add("2");
 	}
 
 	@Override
@@ -27,6 +29,11 @@ public class Boing737 extends Aircraft {
 	
 	public void removeBooking(){
 		//TODO yepp...
+	}
+	
+	public ArrayList getAvailibleSeats(String cabinclass){
+		
+		return seatList;
 	}
 	
 	

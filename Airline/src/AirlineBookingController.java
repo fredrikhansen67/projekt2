@@ -10,6 +10,7 @@ public class AirlineBookingController {
 	public static ArrayList<AirlineBookingController> bookingList = new ArrayList();
 	public static ArrayList<Aircraft> aircraftsList = new ArrayList<Aircraft>();
 	public static ArrayList<Customer> customerList = new ArrayList<Customer>();
+	public static ArrayList<String> cabinClass = new ArrayList<>();
 	
 	
 	// Customer c = new Customer("","","","","");
@@ -45,6 +46,15 @@ public class AirlineBookingController {
 		
 	}
 	
+	public ArrayList getSeatFromAircraft(String flight, String cabinclass){
+		for(Aircraft ac:aircraftsList){
+			if(ac.getName().equals(flight)){
+				ac.getAvailibleSeats(cabinclass);
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public String toString(){
 		String str="";
@@ -53,5 +63,7 @@ public class AirlineBookingController {
 		}
 		return str;
 	}
+	
+	
 
 }
