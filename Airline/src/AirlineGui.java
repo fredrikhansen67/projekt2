@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -118,10 +119,19 @@ public class AirlineGui extends JFrame {
 
         btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ac.addBooking(
+						textField.getText(),
+						convertStringtoInt(textField_1.getText()),
+						textField_1.getText(),
+						textField_3.getText(),
+						comboFlight.getSelectedItem().toString(),
+						comboCabin.getSelectedItem().toString(),
+						convertStringtoInt(comboSeat.getSelectedItem().toString())
+						);
 			
 				System.out.println("Customer name: " + textField.getText()
 									+ "\nage: " + textField_1.getText()
-								 + "\nPhone: " + textField_2.getText()
+								 + "\nPhone: " + textField_1.getText()
 								 + "\nSocial number: " + textField_3.getText()
 				 				+ "\nFlight: " + comboFlight.getSelectedItem()
 				 				+ "\nCabinclass: " + comboCabin.getSelectedItem()
@@ -133,6 +143,13 @@ public class AirlineGui extends JFrame {
 		
         this.setVisible(true);
 		
+		
+	}
+	
+	public int convertStringtoInt(String str){
+		try{
+			return Integer.parseInt(str);
+		}catch(Exception e){System.out.println("Illegal values in field :" + str+":");return 0;}
 		
 	}
 }
