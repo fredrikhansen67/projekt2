@@ -125,8 +125,7 @@ public class AirlineGui extends JFrame {
 								 + "\nSocial number: " + textField_3.getText()
 				 				+ "\nFlight: " + comboFlight.getSelectedItem()
 				 				+ "\nCabinclass: " + comboCabin.getSelectedItem()
-				 				+ "\nSeat: " + comboSeat.getSelectedItem()
-				 				
+				 				+ "\nSeat:  " + comboSeat.getSelectedItem()
 				 				);
 			}
 		});
