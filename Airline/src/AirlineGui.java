@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -109,19 +111,52 @@ public class AirlineGui extends JFrame {
         
         JComboBox comboCabin = new JComboBox();
         comboCabin.setBounds(233, 230, 86, 20);
+        comboCabin.addItem(CabinClass.ECONOMY);
+        comboCabin.addItem(CabinClass.FIRST);	// inte snyggt....
         panel.add(comboCabin);
         
         JComboBox comboSeat = new JComboBox();
         comboSeat.setBounds(233, 260, 86, 20);
+//        comboSeat.addItem("2");
+        ArrayList<String> arr = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+        System.out.println("Arr : "+arr.size());
+        for(String intal :arr){
+			comboSeat.addItem(intal);
+
+        }
+        
+//		for(String intal : ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString())){
+//			System.out.println("intal :"+intal);
+//			comboSeat.addItem(intal);
+//		}
+//        comboSeat.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				ArrayList<String> arr = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+//				for(String intal : arr){
+//					System.out.println("intal :"+intal);
+//					comboSeat.addItem(intal);
+//				}
+//			}
+//		});
+        
         panel.add(comboSeat);
         this.setSize(800, 600);
 
         btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ac.addBooking(
+						textField.getText(),
+						convertStringtoInt(textField_1.getText()),
+						textField_1.getText(),
+						textField_3.getText(),
+						comboFlight.getSelectedItem().toString(),
+						comboCabin.getSelectedItem().toString(),
+						convertStringtoInt(comboSeat.getSelectedItem().toString())
+						);
 			
 				System.out.println("Customer name: " + textField.getText()
 									+ "\nage: " + textField_1.getText()
-								 + "\nPhone: " + textField_2.getText()
+								 + "\nPhone: " + textField_1.getText()
 								 + "\nSocial number: " + textField_3.getText()
 				 				+ "\nFlight: " + comboFlight.getSelectedItem()
 				 				+ "\nCabinclass: " + comboCabin.getSelectedItem()
@@ -133,6 +168,13 @@ public class AirlineGui extends JFrame {
 		
         this.setVisible(true);
 		
+		
+	}
+	
+	public int convertStringtoInt(String str){
+		try{
+			return Integer.parseInt(str);
+		}catch(Exception e){System.out.println("Illegal values in field :" + str+":");return 0;}
 		
 	}
 }

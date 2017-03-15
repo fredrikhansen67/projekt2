@@ -5,12 +5,12 @@ public class Customer {
 	private static int customerID;         
 	private String name;
 	private int age;
-	private int telephone;
-	private int socialNumber;
+	private String telephone;
+	private String socialNumber;
 	private int customerIndex;
 	
 	
-	public Customer(String name, int age, int telephone, int socialNumber) {
+	public Customer(String name, int age, String telephone, String socialNumber) {
 		
 		this.name =  name;
 		this.age = age;
@@ -40,12 +40,12 @@ public class Customer {
 	}
 
 
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
 
-	public int getSocialNumber() {
+	public String getSocialNumber() {
 		return socialNumber;
 	}
 	
