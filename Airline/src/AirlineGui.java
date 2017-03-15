@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +20,7 @@ public class AirlineGui extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	
+	String seatPos="";
 	
 	AirlineBookingController ac = new AirlineBookingController();
 	
@@ -27,6 +28,8 @@ public class AirlineGui extends JFrame {
 		setLocation(0, -15);
 				
 		setTitle("Air Crash ");
+		
+		
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JButton btnNewButton = new JButton("Add booking");
@@ -118,6 +121,9 @@ public class AirlineGui extends JFrame {
         JComboBox comboSeat = new JComboBox();
         comboSeat.setBounds(233, 260, 86, 20);
 //        comboSeat.addItem("2");
+        
+        
+        
         ArrayList<String> arr = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
         System.out.println("Arr : "+arr.size());
         for(String intal :arr){
@@ -125,6 +131,18 @@ public class AirlineGui extends JFrame {
 
         }
         
+        DefaultComboBoxModel  defBox = new DefaultComboBoxModel ();
+        
+        comboSeat.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                String selectedItem = comboSeat.getSelectedItem().toString();
+                System.out.println("SEL :"+selectedItem);   
+                seatPos = selectedItem;
+                System.out.println("*********");
+                comboSeat.setSelectedIndex(0);
+            }
+        });
 //		for(String intal : ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString())){
 //			System.out.println("intal :"+intal);
 //			comboSeat.addItem(intal);
@@ -144,6 +162,9 @@ public class AirlineGui extends JFrame {
 
         btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				comboSeat.removeItem(seatPos);
+				comboSeat.repaint();
+				
 				ac.addBooking(
 						textField.getText(),
 						convertStringtoInt(textField_1.getText()),
@@ -160,12 +181,14 @@ public class AirlineGui extends JFrame {
 								 + "\nSocial number: " + textField_3.getText()
 				 				+ "\nFlight: " + comboFlight.getSelectedItem()
 				 				+ "\nCabinclass: " + comboCabin.getSelectedItem()
-				 				+ "\nSeat:  " + comboSeat.getSelectedItem()
+				 				+ "\nSeat:  " + seatPos
 				 				);
 			}
+		
 		});
         //Display the window.
 		
+        this.update(this.getGraphics());
         this.setVisible(true);
 		
 		
