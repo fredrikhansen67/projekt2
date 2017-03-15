@@ -11,6 +11,7 @@ public class Airline {
 	            	
 	    			ac.initSystem();
 	            	AirlineGui aGui = new AirlineGui();
+	            	
 	            }
 	        });
 		
