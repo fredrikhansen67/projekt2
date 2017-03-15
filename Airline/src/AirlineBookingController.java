@@ -7,9 +7,9 @@ public class AirlineBookingController {
 	//TODO Skapa flygplan, skapa Customer, hantera uppdateringar.....
 	
 	
-	// public static ArrayList<AirlineBookingController> bookingList = new ArrayList();
+	public static ArrayList<AirlineBookingController> bookingList = new ArrayList();
 	public static ArrayList<Aircraft> aircraftsList = new ArrayList<Aircraft>();
-	// public static ArrayList<Customer> customerList = new ArrayLsit();
+	public static ArrayList<Customer> customerList = new ArrayList<Customer>();
 	
 	
 	// Customer c = new Customer("","","","","");
