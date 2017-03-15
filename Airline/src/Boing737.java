@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Boing737 extends Aircraft {
 	
-	ArrayList<String> seatList = new ArrayList<String>(10);
+	private ArrayList<String> seatList = new ArrayList<String>(10);
 	
 	private String name ;
 
@@ -31,8 +31,8 @@ public class Boing737 extends Aircraft {
 		//TODO yepp...
 	}
 	
-	public ArrayList getAvailibleSeats(String cabinclass){
-		
+	public ArrayList<String> getAvailibleSeats(String cabinclass){
+		System.out.println("Boing :"+seatList.size());
 		return seatList;
 	}
 	
