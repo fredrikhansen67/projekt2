@@ -46,10 +46,11 @@ public class AirlineBookingController {
 		
 	}
 	
-	public ArrayList getSeatFromAircraft(String flight, String cabinclass){
+	public ArrayList<String> getSeatFromAircraft(String flight, String cabinclass){
 		for(Aircraft ac:aircraftsList){
 			if(ac.getName().equals(flight)){
-				ac.getAvailibleSeats(cabinclass);
+				System.out.println("MATCH "+ac.getName());
+				return ac.getAvailibleSeats(cabinclass);
 			}
 		}
 		return null;

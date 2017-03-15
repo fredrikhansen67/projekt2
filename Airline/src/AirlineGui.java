@@ -117,8 +117,14 @@ public class AirlineGui extends JFrame {
         
         JComboBox comboSeat = new JComboBox();
         comboSeat.setBounds(233, 260, 86, 20);
-        comboSeat.addItem("2");
-//        ArrayList<String> arr = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+//        comboSeat.addItem("2");
+        ArrayList<String> arr = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+        System.out.println("Arr : "+arr.size());
+        for(String intal :arr){
+			comboSeat.addItem(intal);
+
+        }
+        
 //		for(String intal : ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString())){
 //			System.out.println("intal :"+intal);
 //			comboSeat.addItem(intal);
