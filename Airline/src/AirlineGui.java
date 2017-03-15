@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class AirlineGui extends JFrame {
 	
 	
 	AirlineBookingController ac = new AirlineBookingController();
+	FoodList foodList = new FoodList();
 	
 	public AirlineGui() {
 		setLocation(0, -15);
@@ -113,6 +116,30 @@ public class AirlineGui extends JFrame {
         comboCabin.setBounds(233, 230, 86, 20);
         comboCabin.addItem(CabinClass.ECONOMY);
         comboCabin.addItem(CabinClass.FIRST);	// inte snyggt....
+        
+        
+        ActionListener cbActionListener = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e){
+        		
+        		CabinClass c = (CabinClass) comboCabin.getSelectedItem();
+        		
+        		foodList.getFoodItemsList(c); 
+        		
+        
+        	}
+        };
+        
+//        comboCabin.addItemListener(new ItemListener() {
+//            public void itemStateChanged(ItemEvent arg0) {
+//            	
+//            	
+//            	//foodList.getFoodItemsList(CabinClass.ECONOMY); 
+//            	foodList.getFoodItemsList((CabinClass) comboCabin.getSelectedItem()); 
+//            	
+//            }
+//        });
+        
         panel.add(comboCabin);
         
         JComboBox comboSeat = new JComboBox();
