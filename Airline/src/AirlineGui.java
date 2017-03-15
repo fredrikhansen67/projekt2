@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -131,38 +133,65 @@ public class AirlineGui extends JFrame {
 
         }
         
-        DefaultComboBoxModel  defBox = new DefaultComboBoxModel ();
+        comboFlight.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for(String intal :arr){
+					comboSeat.removeItem(intal);
+
+		        }	
+				
+				ArrayList<String> arr = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+		        System.out.println("Arr : "+arr.size());
+		        for(String intal :arr){
+					comboSeat.addItem(intal);
+
+		        }				
+			}
+		});
         
+        comboSeat.addContainerListener(new ContainerListener() {
+			
+			@Override
+			public void componentRemoved(ContainerEvent e) {
+				for(String intal :arr){
+					comboSeat.removeItem(intal);
+
+		        }	
+				
+				ArrayList<String> arr = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+		        System.out.println("Arr : "+arr.size());
+		        for(String intal :arr){
+					comboSeat.addItem(intal);
+
+		        }					
+			}
+			
+			@Override
+			public void componentAdded(ContainerEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
         comboSeat.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
                 String selectedItem = comboSeat.getSelectedItem().toString();
-                System.out.println("SEL :"+selectedItem);   
+                System.out.println("SELECTED :"+selectedItem);   
                 seatPos = selectedItem;
                 System.out.println("*********");
                 comboSeat.setSelectedIndex(0);
             }
         });
-//		for(String intal : ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString())){
-//			System.out.println("intal :"+intal);
-//			comboSeat.addItem(intal);
-//		}
-//        comboSeat.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				ArrayList<String> arr = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
-//				for(String intal : arr){
-//					System.out.println("intal :"+intal);
-//					comboSeat.addItem(intal);
-//				}
-//			}
-//		});
+
         
         panel.add(comboSeat);
         this.setSize(800, 600);
 
         btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				comboSeat.removeItem(seatPos);
+				//comboSeat.removeItem(seatPos);
 				comboSeat.repaint();
 				
 				ac.addBooking(
@@ -175,12 +204,13 @@ public class AirlineGui extends JFrame {
 						convertStringtoInt(comboSeat.getSelectedItem().toString())
 						);
 			
-				System.out.println("Customer name: " + textField.getText()
-									+ "\nage: " + textField_1.getText()
-								 + "\nPhone: " + textField_1.getText()
-								 + "\nSocial number: " + textField_3.getText()
-				 				+ "\nFlight: " + comboFlight.getSelectedItem()
-				 				+ "\nCabinclass: " + comboCabin.getSelectedItem()
+				System.out.println(
+//						"Customer name: " + textField.getText()+
+//									 "\nage: " + textField_1.getText()+
+//								  "\nPhone: " + textField_1.getText()+
+//								  "\nSocial number: " + textField_3.getText()+
+//				 				 "\nFlight: " + comboFlight.getSelectedItem()+
+				 				 "\nCabinclass: " + comboCabin.getSelectedItem()
 				 				+ "\nSeat:  " + seatPos
 				 				);
 			}

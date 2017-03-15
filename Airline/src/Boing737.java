@@ -36,7 +36,6 @@ public class Boing737 extends Aircraft {
 	}
 	
 	public void removeBooking(int index){
-		//TODO yepp...
 		seatList.set(index, ""+0);
 	}
 	
@@ -46,7 +45,6 @@ public class Boing737 extends Aircraft {
 			if(!i.trim().equals("0"))
 				temp.add(i);
 		}
-		System.out.println("Boing :"+seatList.size());
 		return temp;
 	}
 	
