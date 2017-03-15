@@ -35,7 +35,9 @@ public class AirlineBookingController {
 	
 	public void addBooking(String name ,int age, String phone , String socialNumber, String flight, String cabinclass, int seat){
 		Customer cus = new Customer( name , age,  phone ,  socialNumber);
-		Booking book = new Booking( cus, flight, seat);
+		
+		
+		Booking book = new Booking( cus, flight,cabinclass, seat);
 		
 		for(Aircraft ac:aircraftsList){
 			//TODO leta upp flighten och stoppa in i flyglistan på position 'seat'
