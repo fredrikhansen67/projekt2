@@ -1,22 +1,19 @@
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.TextArea;
-import javax.swing.JComboBox;
 
 public class AirlineGui extends JFrame {
 	private JTextField textField;
@@ -68,7 +65,7 @@ public class AirlineGui extends JFrame {
 		lblBoundsList.add(new int[]{120, 260, 95, 20});
 		
 		
-		
+		Map<List<String>, List<Integer>> lblBoundsMap = new HashMap<>();
 		
 		
 		for (String[] obj : lblIdandNamesList){
