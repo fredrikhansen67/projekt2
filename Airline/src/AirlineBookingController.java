@@ -47,7 +47,7 @@ public class AirlineBookingController implements PricingInterface{
 	 * @param cabinclass
 	 * @param seat
 	 */
-	public void addBooking(String name ,int age, String phone , String socialNumber, String flight, String cabinclass, int seat){
+	public void addBooking(String name ,int age, String phone , String socialNumber, String flight, String cabinclass, int seat, String food){
 		Customer cus = new Customer( name , age,  phone ,  socialNumber);		
 		Booking book = new Booking( cus, flight,cabinclass, seat); //lägg in totalpriset
 		
@@ -59,7 +59,7 @@ public class AirlineBookingController implements PricingInterface{
 				System.out.println(ac.toString());
 			}
 		}
-		CompanyBalance = CompanyBalance+calculateTotalPrice(cabinclass);
+		CompanyBalance = CompanyBalance+calculateTotalPrice(cabinclass, food);
 		
 	}
 	
@@ -67,14 +67,19 @@ public class AirlineBookingController implements PricingInterface{
 		return CompanyBalance;
 	}
 	
-	private int calculateTotalPrice(String cc){
+	private int calculateTotalPrice(String cc, String meal){
 		int price=0;
-		if(cc.equals(CabinClass.FIRST.toString()))
+		if(cc.equals(CabinClass.FIRST.toString())){
 			price+=PricingInterface.FIRST_CLASS_PRICE;
-		else if (cc.equals(CabinClass.ECONOMY.toString()))
+			if(meal!=null)
+				price+=PricingInterface.FIRST_CLASS_MEAL;
+		}
+		else if (cc.equals(CabinClass.ECONOMY.toString())){
 			price+=PricingInterface.FIRST_CLASS_PRICE;
-		
-				
+			if(meal!=null)
+				price+=PricingInterface.ECONOMY_CLASS_MEAL;
+		}
+					
 		return price;
 	}
 	

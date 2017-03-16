@@ -26,12 +26,12 @@ import javax.swing.JTextField;
 import java.awt.Toolkit;
 
 public class AirlineGui extends JFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textField = null;
+	private JTextField textField_1=null;
+	private JTextField textField_2=null;
+	private JTextField textField_3=null;
 	String seatPos="";
-	
+	String bookField=null;
 	
 	AirlineBookingController ac = new AirlineBookingController();
 //	FoodList foodList = new FoodList();
@@ -236,8 +236,10 @@ public class AirlineGui extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//comboSeat.removeItem(seatPos);
 				comboSeat.repaint();
+				//Check all fields all filled in
+				if(comboSeat.getSelectedItem()!=null && comboFood.getSelectedItem()!=null && !textField.getText().isEmpty() && !textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !textField_3.getText().isEmpty()){
 				int seatNr = convertStringtoInt(comboSeat.getSelectedItem().toString());
-				if(seatNr!=0){
+				
 				ac.addBooking(
 						textField.getText(),
 						convertStringtoInt(textField_1.getText()),
@@ -245,19 +247,32 @@ public class AirlineGui extends JFrame {
 						textField_3.getText(),
 						comboFlight.getSelectedItem().toString(),
 						comboCabin.getSelectedItem().toString(),
-						
-						convertStringtoInt(comboSeat.getSelectedItem().toString())
+						convertStringtoInt(comboSeat.getSelectedItem().toString()),
+						comboFood.getSelectedItem().toString()
 						);
 				}
 				else
-					JOptionPane.showMessageDialog(null, "Not sufficient information");
+					errorMessage();
 				modelSeat.removeAllElements();
 				arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
 				for(String item:arrSeat){
 					modelSeat.addElement(item);
 				}
+				comboFlight.setSelectedIndex(0);
+				comboCabin.setSelectedIndex(0);
 				comboSeat.revalidate();	
 				balanceInfo.setText(""+ac.getBalance());
+				
+				//Adding info to upper bar
+//				bookField = ("\n"+bookField+textField.getText()+" "+
+//						convertStringtoInt(textField_1.getText())+
+//						textField_1.getText()+
+//						textField_3.getText()+
+//						comboFlight.getSelectedItem().toString()+
+//						comboCabin.getSelectedItem().toString()+
+//						convertStringtoInt(comboSeat.getSelectedItem().toString())
+//						);
+				
 				System.out.println(
 //						"Customer name: " + textField.getText()+
 //									 "\nage: " + textField_1.getText()+
@@ -276,6 +291,10 @@ public class AirlineGui extends JFrame {
         this.setVisible(true);
 		
 		
+	}
+	
+	public void errorMessage(){
+		JOptionPane.showMessageDialog(null, "Not sufficient information");
 	}
 	
 	public int convertStringtoInt(String str){
