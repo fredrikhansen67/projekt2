@@ -155,17 +155,8 @@ public class AirlineGui extends JFrame {
 			
 			@Override
 			public void componentRemoved(ContainerEvent e) {
-				for(String intal :arr){
-					comboSeat.removeItem(intal);
-
-		        }	
+				// TODO Auto-generated method stub
 				
-				ArrayList<String> arr = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
-		        System.out.println("Arr : "+arr.size());
-		        for(String intal :arr){
-					comboSeat.addItem(intal);
-
-		        }					
 			}
 			
 			@Override
@@ -180,8 +171,7 @@ public class AirlineGui extends JFrame {
                 String selectedItem = comboSeat.getSelectedItem().toString();
                 System.out.println("SELECTED :"+selectedItem);   
                 seatPos = selectedItem;
-                System.out.println("*********");
-                comboSeat.setSelectedIndex(0);
+                //comboSeat.setSelectedIndex(0);
             }
         });
 
