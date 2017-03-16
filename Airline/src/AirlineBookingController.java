@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class AirlineBookingController {
+public class AirlineBookingController implements PricingInterface{
 	
 	public static int CompanyBalance = 0;
 	
