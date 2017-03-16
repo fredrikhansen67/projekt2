@@ -67,7 +67,7 @@ public class AirlineGui extends JFrame {
 		JComboBox<String> comboFlight = new JComboBox<>();
 	    JComboBox<CabinClass> comboCabin = new JComboBox<>();
 	    DefaultComboBoxModel modelSeat = (DefaultComboBoxModel) comboSeat.getModel();
-	    DefaultComboBoxModel modelFlight = (DefaultComboBoxModel) comboFlight.getModel();
+	    DefaultComboBoxModel<String> modelFlight = (DefaultComboBoxModel) comboFlight.getModel();
 
 				
 		
@@ -93,45 +93,10 @@ public class AirlineGui extends JFrame {
 			
 		
 		
-		
-//		//Lablar
-//		JLabel lblName = new JLabel("name:");	
-//		lblName.setBounds(120, 80, 95, 20);
-//		panel.add(lblName);
-//		
-//		JLabel lblAge = new JLabel("Age:");
-//		lblAge.setBounds(120, 110, 95, 20);
-//		panel.add(lblAge);
-//		
-//		JLabel lblPnumber = new JLabel("Telephone:");
-//		lblPnumber.setBounds(120, 140, 95, 20);		
-//		panel.add(lblPnumber);
-//		
-//		JLabel lblSocialNumber = new JLabel("Social number:");
-//        lblSocialNumber.setBounds(120, 170, 95, 20);
-//        panel.add(lblSocialNumber);
-//        
-//        JLabel lblFlight = new JLabel("Flight:");
-//        lblFlight.setBounds(120, 200, 95, 20);
-//        panel.add(lblFlight);
-//        
-//        JLabel lblCabinclass = new JLabel("Cabinclass:");
-//        lblCabinclass.setBounds(120, 230, 95, 20);
-//        panel.add(lblCabinclass);
-//        
-//        JLabel lblSeat = new JLabel("Seat:");
-//        lblSeat.setBounds(120, 260, 95, 20);
-//        panel.add(lblSeat);
-//        
-//        JLabel lblFood = new JLabel("Food:");
-//        lblFood.setBounds(120, 290, 95, 20);
-//        panel.add(lblFood);
-		
 		textField = new JTextField();
 		textField.setBounds(233, 80, 96, 20);
 		panel.add(textField);
 		textField.setColumns(10);
-		
 		
 		
 		textField_1 = new JTextField();
@@ -147,8 +112,7 @@ public class AirlineGui extends JFrame {
 		
 	
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.getContentPane().add(panel);
-        
+        this.getContentPane().add(panel);     
         
         
         textField_3 = new JTextField();
@@ -160,7 +124,7 @@ public class AirlineGui extends JFrame {
         
         
         for(Aircraft ac:AirlineBookingController.aircraftsList){
-        	comboFlight.addItem(ac.getName());
+        	modelFlight.addElement(ac.getName());
         }
         
         comboFlight.setBounds(233, 200, 96, 20);
@@ -175,7 +139,12 @@ public class AirlineGui extends JFrame {
  
         comboCabin.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent arg0){
-        		
+        		modelSeat.removeAllElements();
+				arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+				for(String item:arrSeat){
+					modelSeat.addElement(item);
+				}
+				comboSeat.revalidate();	
         		CabinClass c = (CabinClass) comboCabin.getSelectedItem();
         		System.out.println(c);
         		foodList.getFoodItemsList(c);
@@ -217,7 +186,7 @@ public class AirlineGui extends JFrame {
         panel.add(comboSeat);
         
         JComboBox comboFood = new JComboBox();
-        comboFood.setBounds(233, 291, 96, 20);
+        comboFood.setBounds(233, 291, 341, 20);
         panel.add(comboFood);
         this.setSize(800, 600);
 

@@ -35,26 +35,41 @@ public class AirlineBookingController {
 		Customer cus3 = new Customer("pelle",22,"33","44");
 	}
 	
+	
+	/**
+	 * This method will create the booking, set the balance allocate the seat
+	 * @param name
+	 * @param age
+	 * @param phone
+	 * @param socialNumber
+	 * @param flight
+	 * @param cabinclass
+	 * @param seat
+	 */
 	public void addBooking(String name ,int age, String phone , String socialNumber, String flight, String cabinclass, int seat){
 		Customer cus = new Customer( name , age,  phone ,  socialNumber);		
-		Booking book = new Booking( cus, flight,cabinclass, seat);
+		Booking book = new Booking( cus, flight,cabinclass, seat); //lägg in totalpriset
 		
 		
 		for(Aircraft ac:aircraftsList){
 			//TODO leta upp flighten och stoppa in i flyglistan på position 'seat'
 			if(ac.getName().equals(flight)){
-				System.out.println("MATCH "+ac.getName());
 				ac.addBooking(seat, seat);
 				System.out.println(ac.toString());
 			}
 		}
+		CompanyBalance = CompanyBalance+calculateTotalPrice();
 		
+	}
+	
+	private int calculateTotalPrice(){
+		return 0;
 	}
 	
 	public ArrayList<String> getSeatFromAircraft(String flight, String cabinclass){
 		for(Aircraft ac:aircraftsList){
 			if(ac.getName().equals(flight)){
-				System.out.println("MATCH "+ac.getName());
+				System.out.println("Flight :"+ac.getName());
 				return ac.getAvailibleSeats(cabinclass);
 			}
 		}

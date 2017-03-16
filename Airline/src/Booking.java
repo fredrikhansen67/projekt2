@@ -6,6 +6,7 @@ public class Booking {
 	private String ac;
 	private String cabinclass;
 	private int seatNumber;
+	private int totalPrice;
 	
 	public Booking(Customer cus, String ac, String cabinclass, int seatNumber){
 		this.cus = cus;
