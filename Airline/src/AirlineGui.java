@@ -264,15 +264,17 @@ public class AirlineGui extends JFrame {
 				balanceInfo.setText(""+ac.getBalance());
 				
 				//Adding info to upper bar
-//				bookField = ("\n"+bookField+textField.getText()+" "+
-//						convertStringtoInt(textField_1.getText())+
-//						textField_1.getText()+
-//						textField_3.getText()+
-//						comboFlight.getSelectedItem().toString()+
-//						comboCabin.getSelectedItem().toString()+
-//						convertStringtoInt(comboSeat.getSelectedItem().toString())
-//						);
+				bookField = ("\n"+bookField+textField.getText()+" "+
+						convertStringtoInt(textField_1.getText())+
+						textField_1.getText()+
+						textField_3.getText()+
+						comboFlight.getSelectedItem().toString()+
+						comboCabin.getSelectedItem().toString()+
+						convertStringtoInt(comboSeat.getSelectedItem().toString())
+						);
 				
+				bookingInfo.setText(bookField)
+				bookingInfo.;
 				System.out.println(
 //						"Customer name: " + textField.getText()+
 //									 "\nage: " + textField_1.getText()+
