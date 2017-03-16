@@ -20,6 +20,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
 
@@ -55,13 +56,36 @@ public class AirlineGui extends JFrame {
 		
 		JButton btnNewButton = new JButton("Add booking");
 		btnNewButton.setBackground(new Color(50, 205, 50));
-		
+		//Add booking button
 		btnNewButton.setPreferredSize(new Dimension(50,50));
 		getContentPane().add(btnNewButton, BorderLayout.SOUTH);
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(192, 192, 192));
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+		
+		//Booking info textfield
+		JTextField bookingInfo = new JTextField();
+		JScrollPane scrollBook = new JScrollPane(bookingInfo);
+		bookingInfo.setEditable(false);
+		JPanel panelNorth = new JPanel();
+		panelNorth.setBackground(Color.LIGHT_GRAY);
+		panelNorth.add(scrollBook);
+		bookingInfo.setPreferredSize(new Dimension(600,50));
+		getContentPane().add(panelNorth, BorderLayout.NORTH);
+		
+		
+		JPanel panelEast = new JPanel();
+		JLabel balanceLabel = new JLabel("Balance");
+		panelEast.add(balanceLabel);
+		JTextField balanceInfo = new JTextField();
+		balanceInfo.setBackground(Color.LIGHT_GRAY);
+		balanceInfo.setText("0");
+		panelEast.add(balanceInfo);
+		panelEast.setBackground(Color.LIGHT_GRAY);
+		balanceInfo.setPreferredSize(new Dimension(50,20));
+		balanceInfo.setEditable(false);
+		getContentPane().add(panelEast, BorderLayout.EAST);
 		
 		JComboBox<String> comboSeat = new JComboBox<>();
 		JComboBox<String> comboFlight = new JComboBox<>();
