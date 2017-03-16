@@ -43,6 +43,7 @@ public class AirlineBookingController {
 			//TODO leta upp flighten och stoppa in i flyglistan på position 'seat'
 			if(ac.getName().equals(flight)){
 				ac.addBooking(seat, seat);
+				System.out.println(ac.toString());
 			}
 		}
 		
