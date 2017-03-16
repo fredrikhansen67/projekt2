@@ -25,11 +25,7 @@ public class FoodList implements FoodInterface{
 		foodMap.put(foodItem4, CabinClass.ECONOMY);
 		foodMap.put(foodItem5, CabinClass.FIRST);
 		foodMap.put(foodItem6, CabinClass.FIRST);
-		
-//		System.out.println("Economy foodItems: \n ");
-//		getFoodItemsList(CabinClass.ECONOMY);
-//		System.out.println("Firstclass foodItems: \n ");
-//		getFoodItemsList(CabinClass.FIRST);
+		getFoodItemsList(CabinClass.ECONOMY);
 	}
 	
 
@@ -49,18 +45,12 @@ public class FoodList implements FoodInterface{
 			if(entry.getValue().equals(cabinclass)){
 				temp.put(entry.getKey(), cabinclass);
 				
+				System.out.println( entry.getKey() + " CabinClass :"+entry.getValue());
 			}			
-			
-		}
 		
-			
-		Iterator<Entry<FoodItem, CabinClass>> iter2  = temp.entrySet().iterator();
-		while(iter2.hasNext()){
-			Entry<FoodItem, CabinClass> entry = iter2.next();
-			System.out.println(entry.getKey() + "  " + entry.getValue());
+
 		}
-		
-		return temp;
+			return temp;
 	}
 
 
