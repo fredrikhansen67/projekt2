@@ -273,8 +273,7 @@ public class AirlineGui extends JFrame {
 						convertStringtoInt(comboSeat.getSelectedItem().toString())
 						);
 				
-				bookingInfo.setText(bookField)
-				bookingInfo.;
+				bookingInfo.setText(bookField);
 				System.out.println(
 //						"Customer name: " + textField.getText()+
 //									 "\nage: " + textField_1.getText()+
