@@ -39,11 +39,13 @@ public class AirlineBookingController {
 		Customer cus = new Customer( name , age,  phone ,  socialNumber);		
 		Booking book = new Booking( cus, flight,cabinclass, seat);
 		
+		
 		for(Aircraft ac:aircraftsList){
 			//TODO leta upp flighten och stoppa in i flyglistan på position 'seat'
 			if(ac.getName().equals(flight)){
 				System.out.println("MATCH "+ac.getName());
 				ac.addBooking(seat, seat);
+				System.out.println(ac.toString());
 			}
 		}
 		
