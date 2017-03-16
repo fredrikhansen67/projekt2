@@ -35,17 +35,21 @@ public class FoodList implements FoodInterface{
 	
 	
 	
+	
 	public HashMap<FoodItem, CabinClass> getFoodItemsList(CabinClass cabinclass){
 		
 		HashMap<FoodItem, CabinClass> temp = new HashMap<FoodItem, CabinClass>();
 		
 		Iterator<Entry<FoodItem, CabinClass>> iter  = foodMap.entrySet().iterator();
 		while(iter.hasNext()){
+			
 			Entry<FoodItem, CabinClass> entry = iter.next();
-			if(entry.getValue().equals(cabinclass)){
+			if(entry.getValue().equals(cabinclass)){{
 				temp.put(entry.getKey(), cabinclass);
 				
-				System.out.println( entry.getKey() + " CabinClass :"+entry.getValue());
+			}
+				
+				System.out.println( entry.getKey() + " CabinClass :"+entry.getValue()+" : ");
 			}			
 		 
 			

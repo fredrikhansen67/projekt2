@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AirlineBookingController implements PricingInterface{
 	
@@ -58,14 +59,32 @@ public class AirlineBookingController implements PricingInterface{
 				System.out.println(ac.toString());
 			}
 		}
-		CompanyBalance = CompanyBalance+calculateTotalPrice();
+		CompanyBalance = CompanyBalance+calculateTotalPrice(cabinclass);
 		
 	}
 	
-	private int calculateTotalPrice(){
-		return 0;
+	public int getBalance(){
+		return CompanyBalance;
 	}
 	
+	private int calculateTotalPrice(String cc){
+		int price=0;
+		if(cc.equals(CabinClass.FIRST.toString()))
+			price+=PricingInterface.FIRST_CLASS_PRICE;
+		else if (cc.equals(CabinClass.ECONOMY.toString()))
+			price+=PricingInterface.FIRST_CLASS_PRICE;
+		
+				
+		return price;
+	}
+	
+	public HashMap<FoodItem, CabinClass> getFoodItemsList(String cabinclass){
+		FoodList fl = new FoodList();
+		if(cabinclass.contains(CabinClass.FIRST.toString()))
+			return fl.getFoodItemsList(CabinClass.FIRST);
+		else
+			return fl.getFoodItemsList(CabinClass.ECONOMY);
+	}
 	public ArrayList<String> getSeatFromAircraft(String flight, String cabinclass){
 		for(Aircraft ac:aircraftsList){
 			if(ac.getName().equals(flight)){

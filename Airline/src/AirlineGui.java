@@ -19,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -33,7 +34,7 @@ public class AirlineGui extends JFrame {
 	
 	
 	AirlineBookingController ac = new AirlineBookingController();
-	FoodList foodList = new FoodList();
+//	FoodList foodList = new FoodList();
 	public static Map<String, JComponent> objs = new HashMap<String,JComponent>();
 	
 	public JComponent createLabel(String s1, int x, int y, int w, int h){
@@ -46,6 +47,8 @@ public class AirlineGui extends JFrame {
 	
 	 ArrayList<String> arrSeat;
 	 ArrayList<String> arrFlight;
+	 HashMap<FoodItem,CabinClass>arrFood;
+	 
 	public AirlineGui() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AirlineGui.class.getResource("/resourses/plane.png")));
 		setLocation(0, -15);
@@ -90,9 +93,10 @@ public class AirlineGui extends JFrame {
 		JComboBox<String> comboSeat = new JComboBox<>();
 		JComboBox<String> comboFlight = new JComboBox<>();
 	    JComboBox<CabinClass> comboCabin = new JComboBox<>();
+	    JComboBox<String> comboFood = new JComboBox<>();
 	    DefaultComboBoxModel modelSeat = (DefaultComboBoxModel) comboSeat.getModel();
 	    DefaultComboBoxModel<String> modelFlight = (DefaultComboBoxModel) comboFlight.getModel();
-
+	    DefaultComboBoxModel<String> modelFood = (DefaultComboBoxModel) comboFood.getModel();
 				
 		
 		
@@ -164,14 +168,21 @@ public class AirlineGui extends JFrame {
         comboCabin.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent arg0){
         		modelSeat.removeAllElements();
+        		modelFood.removeAllElements();
 				arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
 				for(String item:arrSeat){
 					modelSeat.addElement(item);
+					
 				}
-				comboSeat.revalidate();	
-        		CabinClass c = (CabinClass) comboCabin.getSelectedItem();
-        		System.out.println(c);
-        		foodList.getFoodItemsList(c);
+				arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());
+				Iterator iter = arrFood.entrySet().iterator();
+				modelFood.addElement(null);
+				while(iter.hasNext()){
+					modelFood.addElement(iter.next().toString());
+				}
+				comboFood.revalidate();	
+   
+				
         	}
         	
         });
@@ -209,16 +220,24 @@ public class AirlineGui extends JFrame {
         
         panel.add(comboSeat);
         
-        JComboBox comboFood = new JComboBox();
+//        JComboBox comboFood = new JComboBox();
+        
         comboFood.setBounds(233, 291, 341, 20);
         panel.add(comboFood);
         this.setSize(800, 600);
 
+        
+        
+        
+        
+        
+        
         btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//comboSeat.removeItem(seatPos);
 				comboSeat.repaint();
-				
+				int seatNr = convertStringtoInt(comboSeat.getSelectedItem().toString());
+				if(seatNr!=0){
 				ac.addBooking(
 						textField.getText(),
 						convertStringtoInt(textField_1.getText()),
@@ -226,16 +245,19 @@ public class AirlineGui extends JFrame {
 						textField_3.getText(),
 						comboFlight.getSelectedItem().toString(),
 						comboCabin.getSelectedItem().toString(),
+						
 						convertStringtoInt(comboSeat.getSelectedItem().toString())
 						);
-				
+				}
+				else
+					JOptionPane.showMessageDialog(null, "Not sufficient information");
 				modelSeat.removeAllElements();
 				arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
 				for(String item:arrSeat){
 					modelSeat.addElement(item);
 				}
 				comboSeat.revalidate();	
-
+				balanceInfo.setText(""+ac.getBalance());
 				System.out.println(
 //						"Customer name: " + textField.getText()+
 //									 "\nage: " + textField_1.getText()+
@@ -257,9 +279,10 @@ public class AirlineGui extends JFrame {
 	}
 	
 	public int convertStringtoInt(String str){
+		
 		try{
 			return Integer.parseInt(str);
-		}catch(Exception e){System.out.println("Illegal values in field :" + str+":");return 0;}
+		}catch(NumberFormatException e){System.out.println("Illegal values in field :" + str+":");return 0;}
 		
 	}
 }
