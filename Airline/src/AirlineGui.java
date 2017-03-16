@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
 
 public class AirlineGui extends JFrame {
 	private JTextField textField;
@@ -45,6 +46,7 @@ public class AirlineGui extends JFrame {
 	 ArrayList<String> arrSeat;
 	 ArrayList<String> arrFlight;
 	public AirlineGui() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(AirlineGui.class.getResource("/resourses/plane.png")));
 		setLocation(0, -15);
 				
 		setTitle("Air Crash ");
