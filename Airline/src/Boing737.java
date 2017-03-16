@@ -44,7 +44,7 @@ public class Boing737 extends Aircraft {
 		ArrayList temp = new ArrayList();
 		for(String i:seatList){
 			int ii = Integer.parseInt(i.trim());
-			System.out.println("ii :"+ii+"  "+lastFirstClassRow);
+			
 			if(ii<=5 && cabinclass.contains(CabinClass.FIRST.toString())){
 				if(ii!=0)
 					temp.add(i);	

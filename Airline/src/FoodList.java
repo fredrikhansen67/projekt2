@@ -25,7 +25,7 @@ public class FoodList implements FoodInterface{
 		foodMap.put(foodItem4, CabinClass.ECONOMY);
 		foodMap.put(foodItem5, CabinClass.FIRST);
 		foodMap.put(foodItem6, CabinClass.FIRST);
-		getFoodItemsList(CabinClass.ECONOMY);
+		
 	}
 	
 
@@ -49,7 +49,7 @@ public class FoodList implements FoodInterface{
 				
 			}
 				
-				System.out.println( entry.getKey() + " CabinClass :"+entry.getValue()+" : ");
+			
 			}			
 		 
 			
