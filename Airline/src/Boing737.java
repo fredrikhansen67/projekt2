@@ -8,6 +8,7 @@ public class Boing737 extends Aircraft {
 	
 	private String name ;
 	private int numberOfSeats=10;
+	int lastFirstClassRow=5;
 	
 	public Boing737(String name){
 		seatList = new ArrayList<String>(numberOfSeats);
@@ -43,10 +44,14 @@ public class Boing737 extends Aircraft {
 	public ArrayList<String> getAvailibleSeats(String cabinclass){
 		ArrayList temp = new ArrayList();
 		for(String i:seatList){
-			if(!i.trim().equals("0"))
-				temp.add(i);
+			int ii = Integer.parseInt(i.trim());
+			System.out.println("ii :"+ii+"  "+lastFirstClassRow);
+			if(ii<=5){
+				if(ii!=0)
+					temp.add(i);	
+			}
 		}
-		System.out.println("Boing :"+seatList.size());
+		System.out.println("Boing :"+seatList.size()+" returns :"+temp.size());
 		return temp;
 	}
 	
