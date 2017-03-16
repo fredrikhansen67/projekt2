@@ -8,12 +8,15 @@ import java.awt.event.ContainerListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,8 +29,19 @@ public class AirlineGui extends JFrame {
 	private JTextField textField_3;
 	String seatPos="";
 	
+	
 	AirlineBookingController ac = new AirlineBookingController();
 	FoodList foodList = new FoodList();
+	public static Map<String, JComponent> objs = new HashMap<String,JComponent>();
+	
+	public JComponent createLabel(String s1, int x, int y, int w, int h){
+		
+		JLabel lbl = new JLabel(s1);	
+		lbl.setBounds(x, y, w, h);
+	    return lbl;
+	}
+	
+	
 	 ArrayList<String> arrSeat;
 	 ArrayList<String> arrFlight;
 	public AirlineGui() {
@@ -54,82 +68,62 @@ public class AirlineGui extends JFrame {
 	    DefaultComboBoxModel modelFlight = (DefaultComboBoxModel) comboFlight.getModel();
 
 				
-		ArrayList<String[]> lblIdandNamesList = new ArrayList<>();
-		lblIdandNamesList.add(new String[] {"lblName", "name:"});
-		lblIdandNamesList.add(new String[] {"lblAge", "Age:"});
-		lblIdandNamesList.add(new String[] {"lblPnumber", "Telephone:"});
-		lblIdandNamesList.add(new String[] {"lblSocialNumber", "Social number:"});
-		lblIdandNamesList.add(new String[] {"lblFlight", "Flight:"});
-		lblIdandNamesList.add(new String[] {"lblCabinclass", "Cabinclass:"});
-		lblIdandNamesList.add(new String[] {"lblSeat", "Seat:"});
-		lblIdandNamesList.add(new String[] {"lblFood", "Food:"});
 		
 		
-		ArrayList<int[]> lblBoundsList = new ArrayList<>();
-		lblBoundsList.add(new int[]{120, 80, 95, 20});
-		lblBoundsList.add(new int[]{120, 110, 95, 20});
-		lblBoundsList.add(new int[]{120, 140, 95, 20});
-		lblBoundsList.add(new int[]{120, 170, 95, 20});
-		lblBoundsList.add(new int[]{120, 200, 95, 20});
-		lblBoundsList.add(new int[]{120, 230, 95, 20});
-		lblBoundsList.add(new int[]{120, 260, 95, 20});
-		lblBoundsList.add(new int[]{120, 260, 95, 20});
+		objs.put("lblName", createLabel("name:", 120, 80, 95, 20));
+		objs.put("lblAge", createLabel("Age:", 120, 110, 95, 20));
+		objs.put("lblPnumber", createLabel("Pnumber:", 120, 140, 95, 20));
+		objs.put("lblSocialNumber", createLabel("Social number:", 120, 170, 95, 20));
+		objs.put("lblFlight", createLabel("Flight:", 120, 200, 95, 20));
+		objs.put("lblCabinclass", createLabel("cabinclass:", 120, 230, 95, 20));
+		objs.put("lblSeat", createLabel("Seat:", 120, 260, 95, 20));
+		objs.put("lblFood", createLabel("Food:", 120, 290, 95, 20));
 		
 		
-		Map<List<String>, List<Integer>> lblBoundsMap = new HashMap<>();
-		
-		
-		for (String[] obj : lblIdandNamesList){
-			for (int i = 0; i < obj.length; i++){
-				System.out.print(obj[i] + "  ");
-			}
-
-			System.out.println(" ");
-
+		Iterator iter = objs.entrySet().iterator();
+		while (iter.hasNext()) {
+			Entry<String, JComponent> thisEntry = (Entry) iter.next();
+			Object key = thisEntry.getKey();
+			JLabel value = (JLabel)thisEntry.getValue();
+			
+			panel.add(value);
 		}
+			
 		
 		
 		
-		for (int[] obj : lblBoundsList){
-			for (int i = 0; i < obj.length; i ++){
-				System.out.print(obj[i] + " ");
-			}
-			System.out.println(" ");
-		}
-		
-		
-		//Lablar
-		JLabel lblName = new JLabel("name:");	
-		lblName.setBounds(120, 80, 95, 20);
-		panel.add(lblName);
-		
-		JLabel lblAge = new JLabel("Age:");
-		lblAge.setBounds(120, 110, 95, 20);
-		panel.add(lblAge);
-		
-		JLabel lblPnumber = new JLabel("Telephone:");
-		lblPnumber.setBounds(120, 140, 95, 20);		
-		panel.add(lblPnumber);
-		
-		JLabel lblSocialNumber = new JLabel("Social number:");
-        lblSocialNumber.setBounds(120, 170, 95, 20);
-        panel.add(lblSocialNumber);
-        
-        JLabel lblFlight = new JLabel("Flight:");
-        lblFlight.setBounds(120, 200, 95, 20);
-        panel.add(lblFlight);
-        
-        JLabel lblCabinclass = new JLabel("Cabinclass:");
-        lblCabinclass.setBounds(120, 230, 95, 20);
-        panel.add(lblCabinclass);
-        
-        JLabel lblSeat = new JLabel("Seat:");
-        lblSeat.setBounds(120, 260, 95, 20);
-        panel.add(lblSeat);
-        
-        JLabel lblFood = new JLabel("Food:");
-        lblFood.setBounds(120, 290, 95, 20);
-        panel.add(lblFood);
+//		//Lablar
+//		JLabel lblName = new JLabel("name:");	
+//		lblName.setBounds(120, 80, 95, 20);
+//		panel.add(lblName);
+//		
+//		JLabel lblAge = new JLabel("Age:");
+//		lblAge.setBounds(120, 110, 95, 20);
+//		panel.add(lblAge);
+//		
+//		JLabel lblPnumber = new JLabel("Telephone:");
+//		lblPnumber.setBounds(120, 140, 95, 20);		
+//		panel.add(lblPnumber);
+//		
+//		JLabel lblSocialNumber = new JLabel("Social number:");
+//        lblSocialNumber.setBounds(120, 170, 95, 20);
+//        panel.add(lblSocialNumber);
+//        
+//        JLabel lblFlight = new JLabel("Flight:");
+//        lblFlight.setBounds(120, 200, 95, 20);
+//        panel.add(lblFlight);
+//        
+//        JLabel lblCabinclass = new JLabel("Cabinclass:");
+//        lblCabinclass.setBounds(120, 230, 95, 20);
+//        panel.add(lblCabinclass);
+//        
+//        JLabel lblSeat = new JLabel("Seat:");
+//        lblSeat.setBounds(120, 260, 95, 20);
+//        panel.add(lblSeat);
+//        
+//        JLabel lblFood = new JLabel("Food:");
+//        lblFood.setBounds(120, 290, 95, 20);
+//        panel.add(lblFood);
 		
 		textField = new JTextField();
 		textField.setBounds(233, 80, 96, 20);
@@ -219,6 +213,10 @@ public class AirlineGui extends JFrame {
 
         
         panel.add(comboSeat);
+        
+        JComboBox comboFood = new JComboBox();
+        comboFood.setBounds(233, 291, 96, 20);
+        panel.add(comboFood);
         this.setSize(800, 600);
 
         btnNewButton.addActionListener(new ActionListener() {
