@@ -45,10 +45,15 @@ public class Boing737 extends Aircraft {
 		for(String i:seatList){
 			int ii = Integer.parseInt(i.trim());
 			System.out.println("ii :"+ii+"  "+lastFirstClassRow);
-			if(ii<=5){
+			if(ii<=5 && cabinclass.contains(CabinClass.FIRST.toString())){
 				if(ii!=0)
 					temp.add(i);	
 			}
+			if(ii>5 && cabinclass.contains(CabinClass.ECONOMY.toString())){
+				if(ii!=0)
+					temp.add(i);	
+			}
+			
 		}
 		System.out.println("Boing :"+seatList.size()+" returns :"+temp.size());
 		return temp;
