@@ -7,15 +7,17 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.TextArea;
-import javax.swing.JComboBox;
 
 public class AirlineGui extends JFrame {
 	private JTextField textField;
@@ -25,6 +27,7 @@ public class AirlineGui extends JFrame {
 	String seatPos="";
 	
 	AirlineBookingController ac = new AirlineBookingController();
+	FoodList foodList = new FoodList();
 	
 	public AirlineGui() {
 		setLocation(0, -15);
@@ -44,52 +47,100 @@ public class AirlineGui extends JFrame {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
+		
+				
+		ArrayList<String[]> lblIdandNamesList = new ArrayList<>();
+		lblIdandNamesList.add(new String[] {"lblName", "name:"});
+		lblIdandNamesList.add(new String[] {"lblAge", "Age:"});
+		lblIdandNamesList.add(new String[] {"lblPnumber", "Telephone:"});
+		lblIdandNamesList.add(new String[] {"lblSocialNumber", "Social number:"});
+		lblIdandNamesList.add(new String[] {"lblFlight", "Flight:"});
+		lblIdandNamesList.add(new String[] {"lblCabinclass", "Cabinclass:"});
+		lblIdandNamesList.add(new String[] {"lblSeat", "Seat:"});
+		lblIdandNamesList.add(new String[] {"lblFood", "Food:"});
+		
+		
+		ArrayList<int[]> lblBoundsList = new ArrayList<>();
+		lblBoundsList.add(new int[]{120, 80, 95, 20});
+		lblBoundsList.add(new int[]{120, 110, 95, 20});
+		lblBoundsList.add(new int[]{120, 140, 95, 20});
+		lblBoundsList.add(new int[]{120, 170, 95, 20});
+		lblBoundsList.add(new int[]{120, 200, 95, 20});
+		lblBoundsList.add(new int[]{120, 230, 95, 20});
+		lblBoundsList.add(new int[]{120, 260, 95, 20});
+		lblBoundsList.add(new int[]{120, 260, 95, 20});
+		
+		
+		Map<List<String>, List<Integer>> lblBoundsMap = new HashMap<>();
+		
+		
+		for (String[] obj : lblIdandNamesList){
+			for (int i = 0; i < obj.length; i++){
+				System.out.print(obj[i] + "  ");
+			}
+
+			System.out.println(" ");
+
+		}
+		
+		
+		
+		for (int[] obj : lblBoundsList){
+			for (int i = 0; i < obj.length; i ++){
+				System.out.print(obj[i] + " ");
+			}
+			System.out.println(" ");
+		}
+		
+		
 		//Lablar
 		JLabel lblName = new JLabel("name:");	
-		lblName.setBounds(120, 80, 65, 20);
+		lblName.setBounds(120, 80, 95, 20);
+		panel.add(lblName);
 		
 		JLabel lblAge = new JLabel("Age:");
-		lblAge.setBounds(120, 110, 65, 20);
+		lblAge.setBounds(120, 110, 95, 20);
 		panel.add(lblAge);
 		
 		JLabel lblPnumber = new JLabel("Telephone:");
-		lblPnumber.setBounds(118, 140, 65, 20);		
+		lblPnumber.setBounds(120, 140, 95, 20);		
+		panel.add(lblPnumber);
 		
-		JLabel lblSocialNumber = new JLabel("Social number");
-        lblSocialNumber.setBounds(118, 170, 91, 20);
+		JLabel lblSocialNumber = new JLabel("Social number:");
+        lblSocialNumber.setBounds(120, 170, 95, 20);
         panel.add(lblSocialNumber);
         
-        JLabel lblFlight = new JLabel("Flight");
-        lblFlight.setBounds(118, 200, 65, 20);
+        JLabel lblFlight = new JLabel("Flight:");
+        lblFlight.setBounds(120, 200, 95, 20);
         panel.add(lblFlight);
         
-        JLabel lblCabinclass = new JLabel("Cabinclass");
-        lblCabinclass.setBounds(118, 230, 65, 20);
+        JLabel lblCabinclass = new JLabel("Cabinclass:");
+        lblCabinclass.setBounds(120, 230, 95, 20);
         panel.add(lblCabinclass);
         
-        JLabel lblSeat = new JLabel("Seat");
-        lblSeat.setBounds(118, 260, 65, 20);
+        JLabel lblSeat = new JLabel("Seat:");
+        lblSeat.setBounds(120, 260, 95, 20);
         panel.add(lblSeat);
         
-        JLabel lblNewLabel = new JLabel("Food");
-        lblNewLabel.setBounds(118, 290, 65, 20);
-        panel.add(lblNewLabel);
+        JLabel lblFood = new JLabel("Food:");
+        lblFood.setBounds(120, 290, 95, 20);
+        panel.add(lblFood);
 		
 		textField = new JTextField();
-		textField.setBounds(233, 80, 86, 20);
+		textField.setBounds(233, 80, 96, 20);
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		panel.add(lblName);
+		
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(233, 110, 86, 20);
+		textField_1.setBounds(233, 110, 96, 20);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
-		panel.add(lblPnumber);
+		
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(233, 140, 86, 20);
+		textField_2.setBounds(233, 140, 96, 20);
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 		
@@ -100,7 +151,7 @@ public class AirlineGui extends JFrame {
         
         
         textField_3 = new JTextField();
-        textField_3.setBounds(233, 170, 86, 20);
+        textField_3.setBounds(233, 170, 96, 20);
         panel.add(textField_3);
         textField_3.setColumns(10);
         
@@ -111,17 +162,32 @@ public class AirlineGui extends JFrame {
         	comboFlight.addItem(ac.getName());
         }
         
-        comboFlight.setBounds(233, 200, 86, 20);
+        comboFlight.setBounds(233, 200, 96, 20);
         panel.add(comboFlight);
         
         JComboBox comboCabin = new JComboBox();
-        comboCabin.setBounds(233, 230, 86, 20);
-        comboCabin.addItem(CabinClass.ECONOMY);
-        comboCabin.addItem(CabinClass.FIRST);	// inte snyggt....
+        comboCabin.setBounds(233, 230, 96, 20);
+        
+        for (CabinClass c : CabinClass.values()){
+        	comboCabin.addItem(c);
+        }
+ 
+        comboCabin.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent arg0){
+        		
+        		CabinClass c = (CabinClass) comboCabin.getSelectedItem();
+        		System.out.println(c);
+        		foodList.getFoodItemsList(c);
+        	}
+        	
+        });
+        
+        
+        
         panel.add(comboCabin);
         
         JComboBox comboSeat = new JComboBox();
-        comboSeat.setBounds(233, 260, 86, 20);
+        comboSeat.setBounds(233, 260, 96, 20);
 //        comboSeat.addItem("2");
         
         
