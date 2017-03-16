@@ -31,9 +31,7 @@ public class AirlineBookingController implements PricingInterface{
 		aircraftsList.add(flyg3);
 		aircraftsList.add(flyg4);
 		aircraftsList.add(flyg5);
-		Customer cus1 = new Customer("Kalle",22,"33","44");
-		Customer cus2 = new Customer("frasse",22,"33","44");
-		Customer cus3 = new Customer("pelle",22,"33","44");
+
 	}
 	
 	
