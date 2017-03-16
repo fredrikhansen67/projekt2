@@ -32,11 +32,10 @@ public class Boing737 extends Aircraft {
 	}
 	
 	public void addBooking(int index, int seat){
-		seatList.set(index, ""+0);
+		seatList.set(index-1, ""+0);
 	}
 	
 	public void removeBooking(int index){
-		//TODO yepp...
 		seatList.set(index, ""+0);
 	}
 	
@@ -46,8 +45,16 @@ public class Boing737 extends Aircraft {
 			if(!i.trim().equals("0"))
 				temp.add(i);
 		}
-		System.out.println("Boing :"+seatList.size());
 		return temp;
+	}
+
+	@Override
+	public String toString() {
+		String res="";
+		for(String str:seatList){
+			res = res+" "+str;
+		}
+		return "Boing737 [seatList=" + res + "]";
 	}
 	
 	
