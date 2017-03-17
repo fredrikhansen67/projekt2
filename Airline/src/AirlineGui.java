@@ -76,7 +76,7 @@ public class AirlineGui extends JFrame {
 		
 		//Booking info textfield
 		JTextField bookingInfo = new JTextField();
-		bookingInfo.setFont(new Font("Tahoma", Font.PLAIN, 6));
+		bookingInfo.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		JScrollPane scrollBook = new JScrollPane(bookingInfo);
 		bookingInfo.setEditable(false);
 		JPanel panelNorth = new JPanel();
@@ -242,8 +242,10 @@ public class AirlineGui extends JFrame {
 						modelFood.addElement(iter.next().toString());
 					}
 				}
+        		if(comboCabin.getSelectedItem()!=null){
         		int flightPrice= ac.getCabinPrice(comboCabin.getSelectedItem().toString());
         		textField_cost.setText(""+flightPrice);
+        		}
         	}
         });
         /**
