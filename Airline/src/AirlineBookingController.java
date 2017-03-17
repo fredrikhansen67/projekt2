@@ -86,7 +86,7 @@ public class AirlineBookingController implements PricingInterface{
 				price+=foodPrice;
 		}
 		else if (cc.equals(CabinClass.ECONOMY.toString())){
-			price+=PricingInterface.FIRST_CLASS_PRICE;
+			price+=PricingInterface.ECONOMY_CLASS_PRICE;
 			if(foodPrice!=0)
 				price+=foodPrice;
 		}
@@ -125,7 +125,8 @@ public class AirlineBookingController implements PricingInterface{
 	
 	
 	public int getCabinPrice(String cc){
-		if (cc.equals(CabinClass.ECONOMY))
+		System.out.println("PP :" +cc);
+		if (cc.equals(CabinClass.ECONOMY.toString()))
 			return PricingInterface.ECONOMY_CLASS_PRICE;
 		else
 			return PricingInterface.FIRST_CLASS_PRICE;

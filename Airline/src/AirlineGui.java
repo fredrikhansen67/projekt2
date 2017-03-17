@@ -253,7 +253,7 @@ public class AirlineGui extends JFrame {
 
 					if(comboCabin.getSelectedItem()!=null){
 		        		int flightPrice= ac.getCabinPrice(comboCabin.getSelectedItem().toString());
-		        		textField_cost.setText(""+flightPrice+mealPrice);
+		        		textField_cost.setText(""+flightPrice);
 		        		}
 				}
         		
@@ -371,6 +371,7 @@ public class AirlineGui extends JFrame {
 				comboCabin.setSelectedIndex(0);
 				flightPrice=0;
 				mealPrice=0;
+				textField_cost.setText("");
 				comboSeat.revalidate();	
 				System.out.println("ac :"+ac.getBalance()+" : "+mealPrice);
 				balanceInfo.setText(""+ac.getBalance());
