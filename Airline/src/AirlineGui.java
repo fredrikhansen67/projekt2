@@ -35,6 +35,8 @@ public class AirlineGui extends JFrame {
 	private JTextField textField_cost=null;
 	String seatPos="";
 	String bookField=null;
+	private int mealPrice=0;
+	private int flightPrice=0;
 	
 	AirlineBookingController ac = new AirlineBookingController();
 //	FoodList foodList = new FoodList();
@@ -104,6 +106,7 @@ public class AirlineGui extends JFrame {
 	    DefaultComboBoxModel modelSeat = (DefaultComboBoxModel) comboSeat.getModel();
 	    DefaultComboBoxModel<String> modelFlight = (DefaultComboBoxModel) comboFlight.getModel();
 	    DefaultComboBoxModel<String> modelFood = (DefaultComboBoxModel) comboFood.getModel();
+	    DefaultComboBoxModel<String> modelCabin = (DefaultComboBoxModel) comboCabin.getModel();
 				
 		
 		
@@ -182,65 +185,91 @@ public class AirlineGui extends JFrame {
 //        }
         comboCabin.addItem(CabinClass.ECONOMY);
         comboCabin.addItem(CabinClass.FIRST);
-//        Collection c = (Collection)comboCabin;
-        
-        
-        
-        /**
-         * Listener for CABINCLASS
-         * 
-         */
-        comboCabin.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent arg0){
-        		modelSeat.removeAllElements();
-        		modelFood.removeAllElements();
-        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
-					arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
-					for(String item:arrSeat){
-						modelSeat.addElement(item);
-						
-					}
-					arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());
-	        		
-					Iterator iter = arrFood.entrySet().iterator();
-					modelFood.addElement(null);
-					while(iter.hasNext()){
-						modelFood.addElement(iter.next().toString());
-					}
-					textField_cost.setText(""+(flightPrice+mealPrice));
-        		}
-				comboFood.revalidate();	
-   
-				
-        	}
-        	
-        });
-        
-             
+          
         panel.add(comboCabin);      
         comboSeat.setBounds(233, 260, 96, 20);
        
-		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
-        arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
-        System.out.println("Arr : "+arrSeat.size());
-        }
+//		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
+//	        arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+//	        System.out.println("Arr : "+arrSeat.size());
+//        }
+		
+		
+		
+		
+		
+		
+		/**
+		 * ActionListener comboFlight
+		 * 
+		 */
         comboFlight.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				modelSeat.removeAllElements();
         		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
-				arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
-				for(String item:arrSeat){
-					modelSeat.addElement(item);
-				}
+					arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+					for(String item:arrSeat){
+						modelSeat.addElement(item);
+					}
 				}
 				comboSeat.revalidate();			
 			
 			}
 		});
         
+        /**
+         * Listener for comboCabin
+         * 
+         */
+        comboCabin.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent arg0){
+        		modelSeat.removeAllElements();
 
+        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
+					arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+					for(String item:arrSeat){
+						modelSeat.addElement(item);						
+					}					
+        		}
+        		
+        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
+            		modelFood.removeAllElements();
+        			arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());      		
+					Iterator iter = arrFood.entrySet().iterator();
+					modelFood.addElement(null);
+					while(iter.hasNext()){
+						modelFood.addElement(iter.next().toString());
+					}
+				}
+        		textField_cost.setText(""+flightPrice);
+				
+        	}
+        	
+        });
+        /**
+         * ActionListener comboFood
+         * 
+         */
+        comboFood.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {			
+				if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
+					int price = ac.getMealPrice(comboCabin.getSelectedItem().toString());
+	        		//TODO add pricing
+					textField_cost.setText(""+(flightPrice+price));
+				}
+				
+			}
+		});
+        
+
+        /**
+         * ActionListener comboSeat
+         * 
+         */
         comboSeat.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
@@ -339,6 +368,8 @@ public class AirlineGui extends JFrame {
 	public void errorMessage(){
 		JOptionPane.showMessageDialog(null, "Not sufficient information");
 	}
+	
+	
 	
 	public int convertStringtoInt(String str){
 		
