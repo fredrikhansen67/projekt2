@@ -35,6 +35,7 @@ public class AirlineGui extends JFrame {
 	private JTextField textField_2=null;
 	private JTextField textField_3=null;
 	private JTextField textField_cost=null;
+	private JTextField textField_win=null;
 	String seatPos="";
 	String bookField="";
 
@@ -59,6 +60,7 @@ public class AirlineGui extends JFrame {
 	 ArrayList<String> arrSeat;
 	 ArrayList<String> arrFlight;
 	 HashMap<FoodItem,CabinClass>arrFood;
+	 private JTextField textField_profit;
 	 
 	public AirlineGui() {
 		
@@ -90,19 +92,6 @@ public class AirlineGui extends JFrame {
 		panelNorth.add(scrollBook);
 		bookingInfo.setPreferredSize(new Dimension(600,50));
 		getContentPane().add(panelNorth, BorderLayout.NORTH);
-		
-		
-		JPanel panelEast = new JPanel();
-		JLabel balanceLabel = new JLabel("Balance");
-		panelEast.add(balanceLabel);
-		JTextField balanceInfo = new JTextField();
-		balanceInfo.setBackground(Color.LIGHT_GRAY);
-		balanceInfo.setText("");
-		panelEast.add(balanceInfo);
-		panelEast.setBackground(Color.LIGHT_GRAY);
-		balanceInfo.setPreferredSize(new Dimension(50,20));
-		balanceInfo.setEditable(false);
-		getContentPane().add(panelEast, BorderLayout.EAST);
 		
 		JComboBox<String> comboSeat = new JComboBox<>();
 		JComboBox<String> comboFlight = new JComboBox<>();
@@ -161,6 +150,8 @@ public class AirlineGui extends JFrame {
 		textField_cost.setBounds(233, 320, 96, 20);
 		panel.add(textField_cost);
 		textField_cost.setColumns(10);
+		
+		
 	
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().add(panel);     
@@ -302,6 +293,33 @@ public class AirlineGui extends JFrame {
         
         comboFood.setBounds(233, 291, 341, 20);
         panel.add(comboFood);
+        
+        
+        JPanel panelEast = new JPanel();
+        panelEast.setBounds(615, 11, 159, 449);
+        panel.add(panelEast);
+        panelEast.setLayout(null);
+        JLabel balanceLabel = new JLabel("Balance");
+        balanceLabel.setBounds(5, 8, 47, 14);
+        panelEast.add(balanceLabel);
+        JTextField balanceInfo = new JTextField();
+        balanceInfo.setBounds(62, 5, 87, 20);
+        balanceInfo.setBackground(Color.LIGHT_GRAY);
+        balanceInfo.setText("");
+        panelEast.add(balanceInfo);
+        panelEast.setBackground(Color.LIGHT_GRAY);
+        balanceInfo.setPreferredSize(new Dimension(50,20));
+        balanceInfo.setEditable(false);
+        
+        JLabel lblProfit = new JLabel("Profit");
+        lblProfit.setBounds(5, 45, 46, 14);
+        panelEast.add(lblProfit);
+        
+        textField_profit = new JTextField();
+        textField_profit.setBackground(Color.LIGHT_GRAY);
+        textField_profit.setBounds(62, 42, 87, 20);
+        panelEast.add(textField_profit);
+        textField_profit.setColumns(10);
         this.setSize(800, 600);
 
         
@@ -375,6 +393,7 @@ public class AirlineGui extends JFrame {
 				comboSeat.revalidate();	
 				System.out.println("ac :"+ac.getBalance()+" : "+mealPrice);
 				balanceInfo.setText(""+ac.getBalance());
+				textField_profit.setText(""+(ac.getBalance()*0.3));
 				
 
 			}
