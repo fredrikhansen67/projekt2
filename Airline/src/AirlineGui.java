@@ -59,11 +59,11 @@ public class AirlineGui extends JFrame {
 		
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton = new JButton("Add booking");
-		btnNewButton.setBackground(new Color(50, 205, 50));
+		JButton btnBooking = new JButton("Add booking");
+		btnBooking.setBackground(new Color(50, 205, 50));
 		//Add booking button
-		btnNewButton.setPreferredSize(new Dimension(50,50));
-		getContentPane().add(btnNewButton, BorderLayout.SOUTH);
+		btnBooking.setPreferredSize(new Dimension(50,50));
+		getContentPane().add(btnBooking, BorderLayout.SOUTH);
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(192, 192, 192));
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -250,7 +250,7 @@ public class AirlineGui extends JFrame {
         
         
         
-        btnNewButton.addActionListener(new ActionListener() {
+        btnBooking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//comboSeat.removeItem(seatPos);
 				comboSeat.repaint();
