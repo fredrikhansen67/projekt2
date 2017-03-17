@@ -56,7 +56,7 @@ public class AirlineGui extends JFrame {
 		setLocation(0, -15);
 				
 		setTitle("Air Crash ");
-		
+		   
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JButton btnBooking = new JButton("Add booking");
