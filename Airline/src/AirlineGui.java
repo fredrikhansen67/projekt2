@@ -35,8 +35,7 @@ public class AirlineGui extends JFrame {
 	private JTextField textField_cost=null;
 	String seatPos="";
 	String bookField=null;
-	private int mealPrice=0;
-	private int flightPrice=0;
+
 	
 	AirlineBookingController ac = new AirlineBookingController();
 //	FoodList foodList = new FoodList();
@@ -243,10 +242,9 @@ public class AirlineGui extends JFrame {
 						modelFood.addElement(iter.next().toString());
 					}
 				}
+        		int flightPrice= ac.getCabinPrice(comboCabin.getSelectedItem().toString());
         		textField_cost.setText(""+flightPrice);
-				
         	}
-        	
         });
         /**
          * ActionListener comboFood
@@ -258,6 +256,7 @@ public class AirlineGui extends JFrame {
 			public void actionPerformed(ActionEvent e) {			
 				if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
 					int price = ac.getMealPrice(comboCabin.getSelectedItem().toString());
+					int flightPrice = ac.getCabinPrice(comboCabin.getSelectedItem().toString());
 	        		//TODO add pricing
 					textField_cost.setText(""+(flightPrice+price));
 				}
