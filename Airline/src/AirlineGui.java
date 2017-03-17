@@ -94,7 +94,6 @@ public class AirlineGui extends JFrame {
 		panelEast.add(balanceLabel);
 		JTextField balanceInfo = new JTextField();
 		balanceInfo.setBackground(Color.LIGHT_GRAY);
-		balanceInfo.setText("0");
 		panelEast.add(balanceInfo);
 		panelEast.setBackground(Color.LIGHT_GRAY);
 		balanceInfo.setPreferredSize(new Dimension(50,20));
@@ -152,7 +151,6 @@ public class AirlineGui extends JFrame {
 		textField_2.setColumns(10);
 		
 		textField_cost = new JTextField();
-		textField_cost.setText("0");
 		textField_cost.setEditable(false);
 		textField_cost.setBackground(Color.LIGHT_GRAY);
 		textField_cost.setBounds(233, 320, 96, 20);
