@@ -32,6 +32,7 @@ public class AirlineGui extends JFrame {
 	private JTextField textField_1=null;
 	private JTextField textField_2=null;
 	private JTextField textField_3=null;
+	private JTextField textField_cost=null;
 	String seatPos="";
 	String bookField=null;
 	
@@ -52,6 +53,9 @@ public class AirlineGui extends JFrame {
 	 HashMap<FoodItem,CabinClass>arrFood;
 	 
 	public AirlineGui() {
+		int mealPrice=0;
+		int flightPrice=0;
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AirlineGui.class.getResource("/resourses/plane.png")));
 		setLocation(0, -15);
 				
@@ -111,6 +115,7 @@ public class AirlineGui extends JFrame {
 		objs.put("lblCabinclass", createLabel("cabinclass:", 120, 230, 95, 20));
 		objs.put("lblSeat", createLabel("Seat:", 120, 260, 95, 20));
 		objs.put("lblFood", createLabel("Food:", 120, 290, 95, 20));
+		objs.put("lblCost", createLabel("Your total coast :", 120, 320, 140, 20));
 		
 		
 		Iterator iter = objs.entrySet().iterator();
@@ -141,6 +146,13 @@ public class AirlineGui extends JFrame {
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 		
+		textField_cost = new JTextField();
+		textField_cost.setText("0");
+		textField_cost.setEditable(false);
+		textField_cost.setBackground(Color.LIGHT_GRAY);
+		textField_cost.setBounds(233, 320, 96, 20);
+		panel.add(textField_cost);
+		textField_cost.setColumns(10);
 	
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().add(panel);     
@@ -183,18 +195,19 @@ public class AirlineGui extends JFrame {
         		modelSeat.removeAllElements();
         		modelFood.removeAllElements();
         		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
-				arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
-				for(String item:arrSeat){
-					modelSeat.addElement(item);
-					
-				}
-				arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());
-        		
-				Iterator iter = arrFood.entrySet().iterator();
-				modelFood.addElement(null);
-				while(iter.hasNext()){
-					modelFood.addElement(iter.next().toString());
-				}
+					arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
+					for(String item:arrSeat){
+						modelSeat.addElement(item);
+						
+					}
+					arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());
+	        		
+					Iterator iter = arrFood.entrySet().iterator();
+					modelFood.addElement(null);
+					while(iter.hasNext()){
+						modelFood.addElement(iter.next().toString());
+					}
+					textField_cost.setText(""+(flightPrice+mealPrice));
         		}
 				comboFood.revalidate();	
    
