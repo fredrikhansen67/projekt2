@@ -43,6 +43,11 @@ public class AirlineGui extends JFrame {
 //	FoodList foodList = new FoodList();
 	public static Map<String, JComponent> objs = new HashMap<String,JComponent>();
 	private String lastValtFood = "";
+	private int mealPrice=0;
+	private int flightPrice=0;
+	
+
+	
 	public JComponent createLabel(String s1, int x, int y, int w, int h){
 		
 		JLabel lbl = new JLabel(s1);	
@@ -56,8 +61,6 @@ public class AirlineGui extends JFrame {
 	 HashMap<FoodItem,CabinClass>arrFood;
 	 
 	public AirlineGui() {
-		int mealPrice=0;
-		int flightPrice=0;
 		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AirlineGui.class.getResource("/resourses/plane.png")));
@@ -94,6 +97,7 @@ public class AirlineGui extends JFrame {
 		panelEast.add(balanceLabel);
 		JTextField balanceInfo = new JTextField();
 		balanceInfo.setBackground(Color.LIGHT_GRAY);
+		balanceInfo.setText("");
 		panelEast.add(balanceInfo);
 		panelEast.setBackground(Color.LIGHT_GRAY);
 		balanceInfo.setPreferredSize(new Dimension(50,20));
@@ -151,6 +155,7 @@ public class AirlineGui extends JFrame {
 		textField_2.setColumns(10);
 		
 		textField_cost = new JTextField();
+		textField_cost.setText("0");
 		textField_cost.setEditable(false);
 		textField_cost.setBackground(Color.LIGHT_GRAY);
 		textField_cost.setBounds(233, 320, 96, 20);
@@ -244,14 +249,11 @@ public class AirlineGui extends JFrame {
 
 						FoodItem fi = (FoodItem) iter.next();
 						modelFood.addElement(fi.getFoodName()+" "+fi.getPrice()+"");
-//						modelFood.addElement(iter.next().toString());
 					}
 
 					if(comboCabin.getSelectedItem()!=null){
-//						lastValtFood=comboFood.getSelectedItem().toString();
 		        		int flightPrice= ac.getCabinPrice(comboCabin.getSelectedItem().toString());
-		        		//ITerera igenom för att hitta matchande FoodItem namn är selected och hitta dess pris..
-		        		textField_cost.setText(""+flightPrice);
+		        		textField_cost.setText(""+flightPrice+mealPrice);
 		        		}
 				}
         		
@@ -266,15 +268,17 @@ public class AirlineGui extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {			
 				if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
-					int price =1;
-					
-					
+					int price =1;			
 					int flightPrice = ac.getCabinPrice(comboCabin.getSelectedItem().toString());
+     			
+					Iterator iter = arrFood.keySet().iterator();
 					
 
-					Iterator iter = arrFood.keySet().iterator();
+							mealPrice = ac.getFoodPrice(""+comboFood.getSelectedItem(), comboCabin.getSelectedItem().toString());
 							price = ac.getFoodPrice(""+comboFood.getSelectedItem(), comboCabin.getSelectedItem().toString());
 
+
+					textField_cost.setText(""+(flightPrice+mealPrice));
 					textField_cost.setText(""+(flightPrice+price));
 				}
 				
@@ -295,8 +299,6 @@ public class AirlineGui extends JFrame {
 
         
         panel.add(comboSeat);
-        
-//        JComboBox comboFood = new JComboBox();
         
         comboFood.setBounds(233, 291, 341, 20);
         panel.add(comboFood);
@@ -330,7 +332,7 @@ public class AirlineGui extends JFrame {
 							comboFlight.getSelectedItem().toString(),
 							comboCabin.getSelectedItem().toString(),
 							convertStringtoInt(comboSeat.getSelectedItem().toString()),
-							food
+							food,mealPrice
 	
 							
 							);
@@ -367,7 +369,10 @@ public class AirlineGui extends JFrame {
 				}
 				comboFlight.setSelectedIndex(0);
 				comboCabin.setSelectedIndex(0);
+				flightPrice=0;
+				mealPrice=0;
 				comboSeat.revalidate();	
+				System.out.println("ac :"+ac.getBalance()+" : "+mealPrice);
 				balanceInfo.setText(""+ac.getBalance());
 				
 
