@@ -272,6 +272,7 @@ public class AirlineGui extends JFrame {
 						convertStringtoInt(comboSeat.getSelectedItem().toString()),
 						food
 //						comboFood.getSelectedItem().toString()
+						
 						);
 				}
 				else
