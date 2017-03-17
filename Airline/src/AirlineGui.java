@@ -265,13 +265,13 @@ public class AirlineGui extends JFrame {
 				ac.addBooking(
 						textField.getText(),
 						convertStringtoInt(textField_1.getText()),
-						textField_1.getText(),
+						textField_2.getText(),
 						textField_3.getText(),
 						comboFlight.getSelectedItem().toString(),
 						comboCabin.getSelectedItem().toString(),
 						convertStringtoInt(comboSeat.getSelectedItem().toString()),
 						food
-//						comboFood.getSelectedItem().toString()
+
 						
 						);
 				}
@@ -289,6 +289,8 @@ public class AirlineGui extends JFrame {
 				comboSeat.revalidate();	
 				balanceInfo.setText(""+ac.getBalance());
 				
+				bookingInfo.setText(bookField);
+				
 				//Adding info to upper bar
         		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
 					bookField = ("\n"+bookField+textField.getText()+" "+
@@ -300,17 +302,9 @@ public class AirlineGui extends JFrame {
 							convertStringtoInt(comboSeat.getSelectedItem().toString())
 							);
 					
-					bookingInfo.setText(bookField);
+			
 				
-				System.out.println(
-//						"Customer name: " + textField.getText()+
-//									 "\nage: " + textField_1.getText()+
-//								  "\nPhone: " + textField_1.getText()+
-//								  "\nSocial number: " + textField_3.getText()+
-//				 				 "\nFlight: " + comboFlight.getSelectedItem()+
-				 				 "\nCabinclass: " + comboCabin.getSelectedItem()
-				 				+ "\nSeat:  " + comboSeat.getSelectedItem()
-				 				);
+
 				}
 			}
 		
