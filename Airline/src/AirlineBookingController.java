@@ -26,12 +26,18 @@ public class AirlineBookingController implements PricingInterface{
 		Aircraft flyg3 = new Boing737("sk123");
 		Aircraft flyg4 = new Boing737("sk124");
 		Aircraft flyg5 = new Boing737("sk125");
+		Aircraft flyg6 = new Airbus("dk301");
+		Aircraft flyg7 = new Airbus("dk302");
+		Aircraft flyg8 = new Airbus("dk303");
+		
 		aircraftsList.add(flyg1);
 		aircraftsList.add(flyg2);
 		aircraftsList.add(flyg3);
 		aircraftsList.add(flyg4);
 		aircraftsList.add(flyg5);
-
+		aircraftsList.add(flyg6);
+		aircraftsList.add(flyg7);
+		aircraftsList.add(flyg8);
 	}
 	
 	
