@@ -70,7 +70,12 @@ public class AirlineBookingController implements PricingInterface{
 	public int getBalance(){
 		return CompanyBalance;
 	}
-	
+	/**
+	 * 
+	 * @param cc
+	 * @param meal
+	 * @return
+	 */
 	private int calculateTotalPrice(String cc, String meal){
 		int price=0;
 		if(cc.equals(CabinClass.FIRST.toString())){
