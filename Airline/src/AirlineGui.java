@@ -24,6 +24,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+
 import java.awt.Toolkit;
 import java.awt.Font;
 
@@ -40,7 +42,7 @@ public class AirlineGui extends JFrame {
 	AirlineBookingController ac = new AirlineBookingController();
 //	FoodList foodList = new FoodList();
 	public static Map<String, JComponent> objs = new HashMap<String,JComponent>();
-	
+	private String lastValtFood = "";
 	public JComponent createLabel(String s1, int x, int y, int w, int h){
 		
 		JLabel lbl = new JLabel(s1);	
@@ -56,6 +58,7 @@ public class AirlineGui extends JFrame {
 	public AirlineGui() {
 		int mealPrice=0;
 		int flightPrice=0;
+		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AirlineGui.class.getResource("/resourses/plane.png")));
 		setLocation(0, -15);
@@ -75,7 +78,7 @@ public class AirlineGui extends JFrame {
 		panel.setLayout(null);
 		
 		//Booking info textfield
-		JTextField bookingInfo = new JTextField();
+		JTextPane bookingInfo = new JTextPane();
 		bookingInfo.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		JScrollPane scrollBook = new JScrollPane(bookingInfo);
 		bookingInfo.setEditable(false);
@@ -235,17 +238,25 @@ public class AirlineGui extends JFrame {
         		
         		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
             		modelFood.removeAllElements();
+
         			arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());      		
-					Iterator iter = arrFood.entrySet().iterator();
+					Iterator iter = arrFood.keySet().iterator();
 					modelFood.addElement(null);
 					while(iter.hasNext()){
-						modelFood.addElement(iter.next().toString());
+
+						FoodItem fi = (FoodItem) iter.next();
+						modelFood.addElement(fi.getFoodName()+" "+fi.getPrice()+"");
+//						modelFood.addElement(iter.next().toString());
 					}
+
+					if(comboCabin.getSelectedItem()!=null){
+//						lastValtFood=comboFood.getSelectedItem().toString();
+		        		int flightPrice= ac.getCabinPrice(comboCabin.getSelectedItem().toString());
+		        		//ITerera igenom för att hitta matchande FoodItem namn är selected och hitta dess pris..
+		        		textField_cost.setText(""+flightPrice);
+		        		}
 				}
-        		if(comboCabin.getSelectedItem()!=null){
-        		int flightPrice= ac.getCabinPrice(comboCabin.getSelectedItem().toString());
-        		textField_cost.setText(""+flightPrice);
-        		}
+        		
         	}
         });
         /**
@@ -257,8 +268,27 @@ public class AirlineGui extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {			
 				if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
-					int price = ac.getMealPrice(comboCabin.getSelectedItem().toString());
+					int price =1;
+					
+					
 					int flightPrice = ac.getCabinPrice(comboCabin.getSelectedItem().toString());
+					
+//            		modelFood.removeAllElements();
+//        			arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());
+//        			
+//        			
+					Iterator iter = arrFood.keySet().iterator();
+//					modelFood.addElement(null);
+//					while(iter.hasNext()){
+//						FoodItem fi = (FoodItem) iter.next();
+
+//						if(comboFood.getSelectedItem().toString().equals(fi.getFoodName().toString())){
+//							System.out.println("index: "+comboFood.getSelectedIndex());
+							price = ac.getFoodPrice(""+comboFood.getSelectedItem(), comboCabin.getSelectedItem().toString());
+
+//						}
+						
+//					}
 					textField_cost.setText(""+(flightPrice+price));
 				}
 				
@@ -323,14 +353,14 @@ public class AirlineGui extends JFrame {
 					
 					//Adding info to upper bar
 	        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
-						bookField = ("\n"+bookField+textField.getText()+ " " +
+						bookField = (""+bookField+textField.getText()+ "\t " +
 								convertStringtoInt(textField_1.getText())+ " " +
 								textField_2.getText()+ " " +
 								textField_3.getText()+ " " + 
 								comboFlight.getSelectedItem().toString()+ " " + 
 								comboCabin.getSelectedItem().toString()+ " " + 
-								convertStringtoInt(comboSeat.getSelectedItem().toString())
-								);
+								convertStringtoInt(comboSeat.getSelectedItem().toString())+
+								"\n");
 						
 					bookingInfo.setText(bookField);	
 					

@@ -91,13 +91,36 @@ public class AirlineBookingController implements PricingInterface{
 					
 		return price;
 	}
-	
+	/**
+	 * 
+	 * @param cc
+	 * @return
+	 */
 	public int getMealPrice(String cc){
 		if (cc.equals(CabinClass.ECONOMY.toString()))
 			return PricingInterface.ECONOMY_CLASS_MEAL;
 		else
 			return PricingInterface.FIRST_CLASS_MEAL;
 	}
+	
+	/**
+	 * 
+	 * @param cc
+	 * @return
+	 */
+	public int getFoodPrice(String item, String cc){	
+//			System.out.println(" [getFoodPrice] "+item+" "+cc );
+			int ret=0;
+			if(true){
+				FoodList fl = new FoodList();
+				ret = fl.getFoodPrice(item, cc);
+			}
+//			System.out.println("RETUR val :"+ret);
+			return ret;
+	}
+	
+	
+	
 	public int getCabinPrice(String cc){
 		if (cc.equals(CabinClass.ECONOMY))
 			return PricingInterface.ECONOMY_CLASS_PRICE;
