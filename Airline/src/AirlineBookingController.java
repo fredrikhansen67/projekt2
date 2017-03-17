@@ -81,6 +81,19 @@ public class AirlineBookingController implements PricingInterface{
 		return price;
 	}
 	
+	public int getMealPrice(String cc){
+		if (cc.equals(CabinClass.ECONOMY.toString()))
+			return PricingInterface.ECONOMY_CLASS_MEAL;
+		else
+			return PricingInterface.FIRST_CLASS_MEAL;
+	}
+	public int getCabinPrice(String cc){
+		if (cc.equals(CabinClass.ECONOMY))
+			return PricingInterface.ECONOMY_CLASS_PRICE;
+		else
+			return PricingInterface.FIRST_CLASS_PRICE;
+	}
+	
 	public HashMap<FoodItem, CabinClass> getFoodItemsList(String cabinclass){
 		FoodList fl = new FoodList();
 		if(cabinclass.contains(CabinClass.FIRST.toString()))
