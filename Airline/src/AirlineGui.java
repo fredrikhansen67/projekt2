@@ -273,22 +273,10 @@ public class AirlineGui extends JFrame {
 					
 					int flightPrice = ac.getCabinPrice(comboCabin.getSelectedItem().toString());
 					
-//            		modelFood.removeAllElements();
-//        			arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());
-//        			
-//        			
-					Iterator iter = arrFood.keySet().iterator();
-//					modelFood.addElement(null);
-//					while(iter.hasNext()){
-//						FoodItem fi = (FoodItem) iter.next();
 
-//						if(comboFood.getSelectedItem().toString().equals(fi.getFoodName().toString())){
-//							System.out.println("index: "+comboFood.getSelectedIndex());
+					Iterator iter = arrFood.keySet().iterator();
 							price = ac.getFoodPrice(""+comboFood.getSelectedItem(), comboCabin.getSelectedItem().toString());
 
-//						}
-						
-//					}
 					textField_cost.setText(""+(flightPrice+price));
 				}
 				
