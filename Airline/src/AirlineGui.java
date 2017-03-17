@@ -34,7 +34,7 @@ public class AirlineGui extends JFrame {
 	private JTextField textField_3=null;
 	private JTextField textField_cost=null;
 	String seatPos="";
-	String bookField=null;
+	String bookField="";
 
 	
 	AirlineBookingController ac = new AirlineBookingController();
@@ -295,25 +295,48 @@ public class AirlineGui extends JFrame {
 				//comboSeat.removeItem(seatPos);
 				comboSeat.repaint();
 				//Check all fields all filled in
-				if(convertStringtoInt(textField_1.getText())!=0 && comboSeat.getSelectedItem()!=null && !textField.getText().isEmpty() && !textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !textField_3.getText().isEmpty()){
-				int seatNr = convertStringtoInt(comboSeat.getSelectedItem().toString());
-				String food = "";
-				if(comboFood.getSelectedItem()==null)
-					food = "No food selected";
-				else
-					food = comboFood.getSelectedItem().toString();
-				ac.addBooking(
-						textField.getText(),
-						convertStringtoInt(textField_1.getText()),
-						textField_2.getText(),
-						textField_3.getText(),
-						comboFlight.getSelectedItem().toString(),
-						comboCabin.getSelectedItem().toString(),
-						convertStringtoInt(comboSeat.getSelectedItem().toString()),
-						food
-
+				if(convertStringtoInt(textField_1.getText())!=0 && comboSeat.getSelectedItem()!=null && !textField.getText().isEmpty() && 
+						!textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !textField_3.getText().isEmpty()){
+					
+					int seatNr = convertStringtoInt(comboSeat.getSelectedItem().toString());
+					String food = "";
+					if(comboFood.getSelectedItem()==null)
+						food = "No food selected";
+					else
+						food = comboFood.getSelectedItem().toString();
+					ac.addBooking(
+							textField.getText(),
+							convertStringtoInt(textField_1.getText()),
+							textField_2.getText(),
+							textField_3.getText(),
+							comboFlight.getSelectedItem().toString(),
+							comboCabin.getSelectedItem().toString(),
+							convertStringtoInt(comboSeat.getSelectedItem().toString()),
+							food
+	
+							
+							);
+					
+					 
+					
+					//Adding info to upper bar
+	        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
+						bookField = ("\n"+bookField+textField.getText()+ " " +
+								convertStringtoInt(textField_1.getText())+ " " +
+								textField_2.getText()+ " " +
+								textField_3.getText()+ " " + 
+								comboFlight.getSelectedItem().toString()+ " " + 
+								comboCabin.getSelectedItem().toString()+ " " + 
+								convertStringtoInt(comboSeat.getSelectedItem().toString())
+								);
 						
-						);
+					bookingInfo.setText(bookField);	
+					
+	
+					}
+					
+				
+				
 				}
 				else
 					errorMessage();
@@ -329,23 +352,7 @@ public class AirlineGui extends JFrame {
 				comboSeat.revalidate();	
 				balanceInfo.setText(""+ac.getBalance());
 				
-				bookingInfo.setText(bookField);
-				
-				//Adding info to upper bar
-        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
-					bookField = ("\n"+bookField+textField.getText()+" "+
-							convertStringtoInt(textField_1.getText())+
-							textField_1.getText()+
-							textField_3.getText()+
-							comboFlight.getSelectedItem().toString()+
-							comboCabin.getSelectedItem().toString()+
-							convertStringtoInt(comboSeat.getSelectedItem().toString())
-							);
-					
-			
-				
 
-				}
 			}
 		
 		});
