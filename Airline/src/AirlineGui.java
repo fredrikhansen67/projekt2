@@ -257,7 +257,6 @@ public class AirlineGui extends JFrame {
 				if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
 					int price = ac.getMealPrice(comboCabin.getSelectedItem().toString());
 					int flightPrice = ac.getCabinPrice(comboCabin.getSelectedItem().toString());
-	        		//TODO add pricing
 					textField_cost.setText(""+(flightPrice+price));
 				}
 				
