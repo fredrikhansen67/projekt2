@@ -7,6 +7,7 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
+import java.awt.Font;
 
 public class AirlineGui extends JFrame {
 	private JTextField textField = null;
@@ -69,6 +71,7 @@ public class AirlineGui extends JFrame {
 		
 		//Booking info textfield
 		JTextField bookingInfo = new JTextField();
+		bookingInfo.setFont(new Font("Tahoma", Font.PLAIN, 6));
 		JScrollPane scrollBook = new JScrollPane(bookingInfo);
 		bookingInfo.setEditable(false);
 		JPanel panelNorth = new JPanel();
@@ -119,7 +122,7 @@ public class AirlineGui extends JFrame {
 			panel.add(value);
 		}
 			
-		
+		//TODO: set selected food list at start.
 		
 		textField = new JTextField();
 		textField.setBounds(233, 80, 96, 20);
@@ -150,36 +153,49 @@ public class AirlineGui extends JFrame {
         
 
         
-        
+        modelFlight.addElement(null);
         for(Aircraft ac:AirlineBookingController.aircraftsList){
         	modelFlight.addElement(ac.getName());
         }
-        
+        comboCabin.addItem(null);
         comboFlight.setBounds(233, 200, 96, 20);
         panel.add(comboFlight);
         
         
         comboCabin.setBounds(233, 230, 96, 20);
         
-        for (CabinClass c : CabinClass.values()){
-        	comboCabin.addItem(c);
-        }
- 
+//        for (CabinClass c : CabinClass.values()){
+//        	comboCabin.addItem(c);
+//        	
+//        }
+        comboCabin.addItem(CabinClass.ECONOMY);
+        comboCabin.addItem(CabinClass.FIRST);
+//        Collection c = (Collection)comboCabin;
+        
+        
+        
+        /**
+         * Listener for CABINCLASS
+         * 
+         */
         comboCabin.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent arg0){
         		modelSeat.removeAllElements();
         		modelFood.removeAllElements();
+        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
 				arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
 				for(String item:arrSeat){
 					modelSeat.addElement(item);
 					
 				}
 				arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());
+        		
 				Iterator iter = arrFood.entrySet().iterator();
 				modelFood.addElement(null);
 				while(iter.hasNext()){
 					modelFood.addElement(iter.next().toString());
 				}
+        		}
 				comboFood.revalidate();	
    
 				
@@ -191,18 +207,20 @@ public class AirlineGui extends JFrame {
         panel.add(comboCabin);      
         comboSeat.setBounds(233, 260, 96, 20);
        
-        
+		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
         arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
         System.out.println("Arr : "+arrSeat.size());
-   
+        }
         comboFlight.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				modelSeat.removeAllElements();
+        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
 				arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
 				for(String item:arrSeat){
 					modelSeat.addElement(item);
+				}
 				}
 				comboSeat.revalidate();			
 			
@@ -237,9 +255,13 @@ public class AirlineGui extends JFrame {
 				//comboSeat.removeItem(seatPos);
 				comboSeat.repaint();
 				//Check all fields all filled in
-				if(comboSeat.getSelectedItem()!=null && comboFood.getSelectedItem()!=null && !textField.getText().isEmpty() && !textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !textField_3.getText().isEmpty()){
+				if(convertStringtoInt(textField_1.getText())!=0 && comboSeat.getSelectedItem()!=null && !textField.getText().isEmpty() && !textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !textField_3.getText().isEmpty()){
 				int seatNr = convertStringtoInt(comboSeat.getSelectedItem().toString());
-				
+				String food = "";
+				if(comboFood.getSelectedItem()==null)
+					food = "No food selected";
+				else
+					food = comboFood.getSelectedItem().toString();
 				ac.addBooking(
 						textField.getText(),
 						convertStringtoInt(textField_1.getText()),
@@ -248,15 +270,19 @@ public class AirlineGui extends JFrame {
 						comboFlight.getSelectedItem().toString(),
 						comboCabin.getSelectedItem().toString(),
 						convertStringtoInt(comboSeat.getSelectedItem().toString()),
-						comboFood.getSelectedItem().toString()
+						food
+//						comboFood.getSelectedItem().toString()
+						
 						);
 				}
 				else
 					errorMessage();
 				modelSeat.removeAllElements();
+        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
 				arrSeat = ac.getSeatFromAircraft(comboFlight.getSelectedItem().toString(), comboCabin.getSelectedItem().toString());
 				for(String item:arrSeat){
 					modelSeat.addElement(item);
+				}
 				}
 				comboFlight.setSelectedIndex(0);
 				comboCabin.setSelectedIndex(0);
@@ -264,16 +290,18 @@ public class AirlineGui extends JFrame {
 				balanceInfo.setText(""+ac.getBalance());
 				
 				//Adding info to upper bar
-				bookField = ("\n"+bookField+textField.getText()+" "+
-						convertStringtoInt(textField_1.getText())+
-						textField_1.getText()+
-						textField_3.getText()+
-						comboFlight.getSelectedItem().toString()+
-						comboCabin.getSelectedItem().toString()+
-						convertStringtoInt(comboSeat.getSelectedItem().toString())
-						);
+        		if(comboFlight.getSelectedItem()!=null && comboCabin.getSelectedItem()!=null) {
+					bookField = ("\n"+bookField+textField.getText()+" "+
+							convertStringtoInt(textField_1.getText())+
+							textField_1.getText()+
+							textField_3.getText()+
+							comboFlight.getSelectedItem().toString()+
+							comboCabin.getSelectedItem().toString()+
+							convertStringtoInt(comboSeat.getSelectedItem().toString())
+							);
+					
+					bookingInfo.setText(bookField);
 				
-				bookingInfo.setText(bookField);
 				System.out.println(
 //						"Customer name: " + textField.getText()+
 //									 "\nage: " + textField_1.getText()+
@@ -283,6 +311,7 @@ public class AirlineGui extends JFrame {
 				 				 "\nCabinclass: " + comboCabin.getSelectedItem()
 				 				+ "\nSeat:  " + comboSeat.getSelectedItem()
 				 				);
+				}
 			}
 		
 		});

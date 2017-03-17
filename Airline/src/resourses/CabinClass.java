@@ -2,6 +2,6 @@ package resourses;
 
 public enum CabinClass {
 	
-	ECONOMY, FIRSTCLASS ;
+	FIRSTCLASS, ECONOMY ;
 
 }

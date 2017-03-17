@@ -95,10 +95,10 @@ public class AirlineBookingController implements PricingInterface{
 			return fl.getFoodItemsList(CabinClass.ECONOMY);
 	}
 	public ArrayList<String> getSeatFromAircraft(String flight, String cabinclass){
-		for(Aircraft ac:aircraftsList){
-			if(ac.getName().equals(flight)){
-				System.out.println("Flight :"+ac.getName());
-				return ac.getAvailibleSeats(cabinclass);
+		for(Aircraft plane:aircraftsList){
+			if(plane.getName().equals(flight)){
+			
+				return plane.getAvailibleSeats(cabinclass);
 			}
 		}
 		return null;
