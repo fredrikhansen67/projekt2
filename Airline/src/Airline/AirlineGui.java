@@ -1,16 +1,12 @@
+package Airline;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -30,12 +26,15 @@ import java.awt.Toolkit;
 import java.awt.Font;
 
 public class AirlineGui extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField = null;
 	private JTextField textField_1=null;
 	private JTextField textField_2=null;
 	private JTextField textField_3=null;
 	private JTextField textField_cost=null;
-	private JTextField textField_win=null;
 	String seatPos="";
 	String bookField="";
 
@@ -43,12 +42,7 @@ public class AirlineGui extends JFrame {
 	AirlineBookingController ac = new AirlineBookingController();
 //	FoodList foodList = new FoodList();
 	public static Map<String, JComponent> objs = new HashMap<String,JComponent>();
-	private String lastValtFood = "";
 	private int mealPrice=0;
-	private int flightPrice=0;
-	
-
-	
 	public JComponent createLabel(String s1, int x, int y, int w, int h){
 		
 		JLabel lbl = new JLabel(s1);	
@@ -97,16 +91,16 @@ public class AirlineGui extends JFrame {
 		JComboBox<String> comboFlight = new JComboBox<>();
 	    JComboBox<CabinClass> comboCabin = new JComboBox<>();
 	    JComboBox<String> comboFood = new JComboBox<>();
-	    DefaultComboBoxModel modelSeat = (DefaultComboBoxModel) comboSeat.getModel();
-	    DefaultComboBoxModel<String> modelFlight = (DefaultComboBoxModel) comboFlight.getModel();
-	    DefaultComboBoxModel<String> modelFood = (DefaultComboBoxModel) comboFood.getModel();
+	    DefaultComboBoxModel<String> modelSeat = (DefaultComboBoxModel<String>) comboSeat.getModel();
+	    DefaultComboBoxModel<String> modelFlight = (DefaultComboBoxModel<String>) comboFlight.getModel();
+	    DefaultComboBoxModel<String> modelFood = (DefaultComboBoxModel<String>) comboFood.getModel();
 	    DefaultComboBoxModel<String> modelCabin = (DefaultComboBoxModel) comboCabin.getModel();
 				
 		
 		
 		objs.put("lblName", createLabel("name:", 120, 80, 95, 20));
 		objs.put("lblAge", createLabel("Age:", 120, 110, 95, 20));
-		objs.put("lblPnumber", createLabel("Pnumber:", 120, 140, 95, 20));
+		objs.put("lblPnumber", createLabel("Phone number:", 120, 140, 95, 20));
 		objs.put("lblSocialNumber", createLabel("Social number:", 120, 170, 95, 20));
 		objs.put("lblFlight", createLabel("Flight:", 120, 200, 95, 20));
 		objs.put("lblCabinclass", createLabel("cabinclass:", 120, 230, 95, 20));
@@ -115,16 +109,15 @@ public class AirlineGui extends JFrame {
 		objs.put("lblCost", createLabel("Your total coast :", 120, 320, 140, 20));
 		
 		
-		Iterator iter = objs.entrySet().iterator();
+		Iterator<Entry<String, JComponent>> iter = objs.entrySet().iterator();
 		while (iter.hasNext()) {
-			Entry<String, JComponent> thisEntry = (Entry) iter.next();
-			Object key = thisEntry.getKey();
+			Entry<String, JComponent> thisEntry = (Entry<String, JComponent>) iter.next();
+//			Object key = thisEntry.getKey();
 			JLabel value = (JLabel)thisEntry.getValue();
 			
 			panel.add(value);
 		}
 			
-		//TODO: set selected food list at start.
 		
 		textField = new JTextField();
 		textField.setBounds(233, 80, 96, 20);
@@ -234,7 +227,7 @@ public class AirlineGui extends JFrame {
             		modelFood.removeAllElements();
 
         			arrFood = ac.getFoodItemsList(comboCabin.getSelectedItem().toString());      		
-					Iterator iter = arrFood.keySet().iterator();
+					Iterator<FoodItem> iter = arrFood.keySet().iterator();
 					modelFood.addElement(null);
 					while(iter.hasNext()){
 
@@ -262,11 +255,8 @@ public class AirlineGui extends JFrame {
 					int price =1;			
 					int flightPrice = ac.getCabinPrice(comboCabin.getSelectedItem().toString());
      			
-					Iterator iter = arrFood.keySet().iterator();
-					
-
-							mealPrice = ac.getFoodPrice(""+comboFood.getSelectedItem(), comboCabin.getSelectedItem().toString());
-							price = ac.getFoodPrice(""+comboFood.getSelectedItem(), comboCabin.getSelectedItem().toString());
+					mealPrice = ac.getFoodPrice(""+comboFood.getSelectedItem(), comboCabin.getSelectedItem().toString());
+					price = ac.getFoodPrice(""+comboFood.getSelectedItem(), comboCabin.getSelectedItem().toString());
 
 
 					textField_cost.setText(""+(flightPrice+mealPrice));
@@ -336,7 +326,6 @@ public class AirlineGui extends JFrame {
 				if(convertStringtoInt(textField_1.getText())!=0 && comboSeat.getSelectedItem()!=null && !textField.getText().isEmpty() && 
 						!textField_1.getText().isEmpty() && !textField_2.getText().isEmpty() && !textField_3.getText().isEmpty()){
 					
-					int seatNr = convertStringtoInt(comboSeat.getSelectedItem().toString());
 					String food = "";
 					if(comboFood.getSelectedItem()==null)
 						food = "No food selected";
@@ -387,14 +376,16 @@ public class AirlineGui extends JFrame {
 				}
 				comboFlight.setSelectedIndex(0);
 				comboCabin.setSelectedIndex(0);
-				flightPrice=0;
 				mealPrice=0;
 				textField_cost.setText("");
 				comboSeat.revalidate();	
 				System.out.println("ac :"+ac.getBalance()+" : "+mealPrice);
 				balanceInfo.setText(""+ac.getBalance());
 				textField_profit.setText(""+(ac.getBalance()*0.3));
-				
+				textField.setText("");
+				textField_1.setText("");
+				textField_2.setText("");
+				textField_3.setText("");
 
 			}
 		

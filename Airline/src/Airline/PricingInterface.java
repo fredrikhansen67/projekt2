@@ -1,3 +1,4 @@
+package Airline;
 
 public interface PricingInterface {
 	
