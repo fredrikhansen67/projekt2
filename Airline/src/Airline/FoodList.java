@@ -1,8 +1,6 @@
 package Airline;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 public class FoodList implements FoodInterface{
@@ -47,7 +45,7 @@ public class FoodList implements FoodInterface{
 		int retur=0;
 		if(cc.contains(CabinClass.FIRST.toString())){
 			arrFood= getFoodItemsList(CabinClass.FIRST);
-			Iterator iter = arrFood.keySet().iterator();
+			Iterator<FoodItem> iter = arrFood.keySet().iterator();
 			while(iter.hasNext()){
 				FoodItem fi = (FoodItem)iter.next();
 				if(item.contains(fi.getFoodName())){
@@ -60,7 +58,7 @@ public class FoodList implements FoodInterface{
 					
 		else if(cc.contains(CabinClass.ECONOMY.toString())){
 			arrFood= getFoodItemsList(CabinClass.ECONOMY);
-			Iterator iter2 = arrFood.keySet().iterator();
+			Iterator<FoodItem> iter2 = arrFood.keySet().iterator();
 			while(iter2.hasNext()){
 				FoodItem fi2 = (FoodItem)iter2.next();
 				if(item.contains(fi2.getFoodName())){

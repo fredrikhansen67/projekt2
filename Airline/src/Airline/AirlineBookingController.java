@@ -9,7 +9,7 @@ public class AirlineBookingController implements PricingInterface{
 	//TODO Skapa flygplan, skapa Customer, hantera uppdateringar.....
 	
 	
-	public static ArrayList<AirlineBookingController> bookingList = new ArrayList();
+	public static ArrayList<AirlineBookingController> bookingList = new ArrayList<AirlineBookingController>();
 	public static ArrayList<Aircraft> aircraftsList = new ArrayList<Aircraft>();
 	public static ArrayList<Customer> customerList = new ArrayList<Customer>();
 	public static ArrayList<String> cabinClass = new ArrayList<>();
@@ -53,10 +53,6 @@ public class AirlineBookingController implements PricingInterface{
 	 * @param seat
 	 */
 	public void addBooking(String name ,int age, String phone , String socialNumber, String flight, String cabinclass, int seat, String food, int foodPrice){
-		Customer cus = new Customer( name , age,  phone ,  socialNumber);		
-		Booking book = new Booking( cus, flight,cabinclass, seat); //lägg in totalpriset
-		
-		
 		for(Aircraft ac:aircraftsList){
 			//TODO leta upp flighten och stoppa in i flyglistan på position 'seat'
 			if(ac.getName().equals(flight)){

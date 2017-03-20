@@ -1,7 +1,6 @@
 package Airline;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
 
 public class Airbus extends Aircraft {
 	
@@ -42,7 +41,7 @@ public class Airbus extends Aircraft {
 	}
 	
 	public ArrayList<String> getAvailibleSeats(String cabinclass){
-		ArrayList temp = new ArrayList();
+		ArrayList<String> temp = new ArrayList<String>();
 		for(String i:seatList){
 			int ii = Integer.parseInt(i.trim());
 			
